@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -174804484191063705, guid: 6db792ee65542994284cd0f3d554f054, type: 3}
-  m_Color: {r: 0.9056604, g: 0.7903168, b: 0.7903168, a: 1}
+  m_Color: {r: 0.7264151, g: 0.5585173, b: 0.5585173, a: 1}
   m_Transform:
     e00: 1
     e01: 0
