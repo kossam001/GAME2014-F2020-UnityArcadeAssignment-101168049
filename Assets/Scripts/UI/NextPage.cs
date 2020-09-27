@@ -1,4 +1,15 @@
-﻿using System.Collections;
+﻿/* NewPage.cs
+ * 
+ * Samuel Ko
+ * 101168049
+ * Last Modified: 2020-09-26
+ * 
+ * Enables the next GameObject in a provided list while disabling the current GameObject.
+ * 
+ * 2020-09-26: Added script to demo the instruction screens.
+ */ 
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
