@@ -22,6 +22,7 @@ public class NextPage : MonoBehaviour
     {
         pages[pageNum].SetActive(false);
 
+        // Once the max page count is hit, go back to 0
         if (pageNum == pages.Count - 1)
         {
             pageNum = 0;
