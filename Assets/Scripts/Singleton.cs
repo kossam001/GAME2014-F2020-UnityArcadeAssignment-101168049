@@ -1,4 +1,4 @@
-﻿/* SwapScalerReference.cs
+﻿/* Singleton.cs
  * 
  * Samuel Ko
  * 101168049

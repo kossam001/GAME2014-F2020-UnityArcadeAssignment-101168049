@@ -1,4 +1,4 @@
-﻿/* NewPage.cs
+﻿/* NextPage.cs
  * 
  * Samuel Ko
  * 101168049
