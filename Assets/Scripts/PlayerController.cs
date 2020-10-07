@@ -16,6 +16,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    public GameObject fireball;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Turn();
+        Fire();
     }
 
     private void Move()
@@ -72,5 +74,13 @@ public class PlayerController : MonoBehaviour
         //{
         //    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 270)), rotationSpeed);
         //}
+    }
+
+    private void Fire()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
+        }
     }
 }
