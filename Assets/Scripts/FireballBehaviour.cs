@@ -2,13 +2,14 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-06
+ * Last Modified: 2020-10-07
  * 
  * To be attached to a fireball GameObject.
  * What a fireball is supposed to move forward until it collides with something
  * and disappears.
  * 
  * 2020-10-06: Added this script.
+ * 2020-10-07: Added collision handling.
  */
 
 using System.Collections;
@@ -39,6 +40,8 @@ public class FireballBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "StaticObstacle")
+        {
             Destroy(gameObject);
+        }
     }
 }
