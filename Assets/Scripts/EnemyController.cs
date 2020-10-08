@@ -2,11 +2,12 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-07
+ * Last Modified: 2020-10-08
  * 
  * Controls the enemy character.
  * 
  * 2020-10-07: Added this script.
+ * 2020-10-08: Added turning.
  */
 
 using System.Collections;
@@ -33,24 +34,98 @@ public class EnemyController : MonoBehaviour
     private void Move()
     {
         // moves character by getting axis value - keyboard input 
-        transform.position += new Vector3(speed * Time.deltaTime,
-                                          speed * Time.deltaTime,
+        transform.position += new Vector3(transform.right.x * speed * Time.deltaTime,
+                                          transform.right.y * speed * Time.deltaTime,
                                           0.0f);
+
+        
     }
 
+    private bool CanTurnRight()
+    {
+        // Check for obstructions on the right
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 3, 0x0100);
+
+        //Debug.Log(hit.collider.name);
+
+        // if there was a hit
+        //if (hit)
+        //{
+
+        //    return false;
+        //}
+
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(1.4f, 1.4f), 0, -transform.up, 3, 0x0100);
+        if (hit)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CanTurnLeft()
+    {
+        // Check for obstructions on the right
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(1.4f, 1.4f), 0, transform.up, 3, 0x0100);
+
+        // if there was a hit
+        if (hit)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ShouldTurnBack()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 1, 0x0100);
+
+        if (hit)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    bool isTurning = false;
+    Vector2 targetDirection;
     private void Turn()
     {
-        // movement vector - calculated using current position minus future position
-        Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal") + transform.position.x, Input.GetAxis("Vertical") + transform.position.y)
-            - transform.position;
+        if (CanTurnRight() && !isTurning)
+        {
+            Debug.Log("Right");
+            isTurning = true;
+            StartCoroutine(TurningInProgress(-transform.up, -90));
+        }
+        else if (CanTurnLeft() && !isTurning)
+        {
+            Debug.Log("Left");
+            isTurning = true;
+            StartCoroutine(TurningInProgress(transform.up, 90));
+        }
+        else if (ShouldTurnBack() && !isTurning)
+        {
+            Debug.Log("Back");
+            isTurning = true;
+            StartCoroutine(TurningInProgress(-transform.right, 180));
+        }
+    }
 
-        // don't update rotation if player is not moving
-        if (moveDirection.sqrMagnitude != 0)
+    private IEnumerator TurningInProgress(Vector2 targetDirection, float angle)
+    {
+        while (Vector2.Angle(transform.right, targetDirection) > 1)
         {
             // rotate player gradually in the direction of movement.
-            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 10);
+            transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles,
+                transform.rotation.eulerAngles + new Vector3(0, 0, angle),
+                0.05f);
+            yield return null;
         }
+
+        yield return new WaitForSeconds(0.5f); // Delay turning for 0.5s to prevent U-turns
+        isTurning = false;
     }
 }
