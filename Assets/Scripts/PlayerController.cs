@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public GameObject fireball;
+    public float size = 0.9f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,10 @@ public class PlayerController : MonoBehaviour
         Move();
         Turn();
         Fire();
+
+        Debug.Log("Turn Right? " + !CanTurnRight());
+        Debug.Log("Turn Left? " + !CanTurnLeft());
+        Debug.Log("Turn Back? " + !CanTurnBack());
     }
 
     private void Move()
@@ -83,5 +88,25 @@ public class PlayerController : MonoBehaviour
             GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
             newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
         }
+    }
+
+    public float dist = 1.1f;
+    public float scale = 0.1f;
+    private bool CanTurnBack()
+    {
+        return Physics2D.BoxCast(transform.position,
+    new Vector2(size * scale, size * scale), 0, transform.right, dist, 0x0100);
+    }
+
+    private bool CanTurnRight()
+    {
+        return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
+            new Vector2(size, size), 0, -transform.up, 3, 0x0100);
+    }
+
+    private bool CanTurnLeft()
+    {
+        return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
+            new Vector2(size, size), 0, transform.up, 3, 0x0100);
     }
 }
