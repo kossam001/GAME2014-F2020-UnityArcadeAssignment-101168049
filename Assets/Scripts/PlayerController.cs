@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Turn Right? " + !CanTurnRight());
         Debug.Log("Turn Left? " + !CanTurnLeft());
-        Debug.Log("Turn Back? " + !CanTurnBack());
+        Debug.Log("Turn Back? " + CanTurnBack());
+        Debug.Log("See? " + Search());
     }
 
     private void Move()
@@ -108,5 +109,11 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
             new Vector2(size, size), 0, transform.up, 3, 0x0100);
+    }
+
+    public float sight = 10;
+    private bool Search()
+    {
+        return Physics2D.Raycast(transform.position, transform.right, 10, 0b1100000000);
     }
 }
