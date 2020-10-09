@@ -62,16 +62,60 @@ public class EnemyController : MonoBehaviour
                 playerLastPos = hit.collider.bounds.center;
                 playerLastDir = hit.collider.gameObject.transform.right;
                 Debug.Log("Player Last Dir " + playerLastPos);
+
+                return;
             }
         }
 
-        //// Search right
-        //// Offset from the center of the sprite
-        //hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, 6, 0b1100000000);
+        // Search right
+        // Offset from the center of the sprite
+        hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, 6, 0b1100000000);
 
-        //// Search left
-        //// Offset from the center of the sprite
-        //hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, 6, 0b1100000000);
+        if (hit.collider)
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                Debug.Log("Enemy Found");
+
+                // Close distance on enemy
+                isChasing = true;
+                playerLastPos = hit.collider.bounds.center;
+                playerLastDir = hit.collider.gameObject.transform.right;
+                Debug.Log("Player Last Dir " + playerLastPos);
+
+                if (CanTurnRight() && !isTurning)
+                {
+                    MakeTurn("Right", -transform.up, -90, 1f);
+                }
+
+                return;
+            }
+        }
+
+        // Search left
+        // Offset from the center of the sprite
+        hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, 6, 0b1100000000);
+
+        if (hit.collider)
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                Debug.Log("Enemy Found");
+
+                // Close distance on enemy
+                isChasing = true;
+                playerLastPos = hit.collider.bounds.center;
+                playerLastDir = hit.collider.gameObject.transform.right;
+                Debug.Log("Player Last Dir " + playerLastPos);
+
+                if (CanTurnLeft() && !isTurning)
+                {
+                    MakeTurn("Left", transform.up, 90, 1f);
+                }
+
+                return;
+            }
+        }
     }
 
     Vector3 playerLastPos;

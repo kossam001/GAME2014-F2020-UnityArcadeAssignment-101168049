@@ -2,11 +2,12 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-06
+ * Last Modified: 2020-10-09
  * 
  * Controls the player character.
  * 
  * 2020-10-06: Added this script.
+ * 2020-10-09: Added testing code.  Need removal.
  */
 
 using System.Collections;
