@@ -16,7 +16,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    public CharacterStats stats;
     public GameObject fireball;
     public float size = 0.9f;
 
@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // moves character by getting axis value - keyboard input 
-        transform.position += new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime,
-                                          Input.GetAxis("Vertical") * speed * Time.deltaTime,
+        transform.position += new Vector3(Input.GetAxis("Horizontal") * stats.speed * Time.deltaTime,
+                                          Input.GetAxis("Vertical") * stats.speed * Time.deltaTime,
                                           0.0f);
     }
 

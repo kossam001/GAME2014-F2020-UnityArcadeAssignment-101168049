@@ -18,7 +18,7 @@ public class CPUFire : MonoBehaviour
     [SerializeField]
     private CPUMove movement;
     public GameObject fireball;
-    public CPUStats stats;
+    public CharacterStats stats;
 
     // Update is called once per frame
     void Update()

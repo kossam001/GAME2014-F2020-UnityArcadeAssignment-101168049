@@ -18,7 +18,7 @@ using UnityEngine;
 
 public class CPUSearch : MonoBehaviour
 {
-    public CPUStats stats;
+    public CharacterStats stats;
 
     public enum DetectionDirection
     {

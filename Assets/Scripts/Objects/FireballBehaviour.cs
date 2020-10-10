@@ -36,6 +36,7 @@ public class FireballBehaviour : MonoBehaviour
         // Fireballs should travel faster than owner
         if (owner)
         {
+            speed = owner.GetComponent<CharacterStats>().speed + 1.5f;
         }
     }
 

@@ -8458,6 +8458,7 @@ GameObject:
   - component: {fileID: 1874757415}
   - component: {fileID: 1874757417}
   - component: {fileID: 1874757414}
+  - component: {fileID: 1874757418}
   m_Layer: 9
   m_Name: RedDinoTopDown
   m_TagString: Player
@@ -8542,7 +8543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee63699d96284cf44a733121e15cf9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  stats: {fileID: 1874757418}
   fireball: {fileID: 1764842702609456422, guid: 6768cce46fdf9414883e1c13bee72563, type: 3}
   size: 0.9
   dist: 1.25
@@ -8601,6 +8602,23 @@ CircleCollider2D:
   m_Offset: {x: 2.4, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &1874757418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874757411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd212ade4568724493343bbe839204c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  firerate: 10
+  health: 1
+  detectionRange: 15
+  isChasing: 0
 --- !u!1 &1886691114
 GameObject:
   m_ObjectHideFlags: 0
@@ -8965,6 +8983,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  firerate: 10
+  health: 1
+  detectionRange: 15
   isChasing: 0
 --- !u!1 &1892266906
 GameObject:

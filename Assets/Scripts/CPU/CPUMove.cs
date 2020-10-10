@@ -20,7 +20,7 @@ public class CPUMove : MonoBehaviour
     [SerializeField]
     private float boxCastSize = 0.9f;
     public CPUSearch search;
-    public CPUStats stats;
+    public CharacterStats stats;
 
     public void Wander()
     {

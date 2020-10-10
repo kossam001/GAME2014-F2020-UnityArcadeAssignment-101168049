@@ -4,7 +4,7 @@
  * 101168049
  * Last Modified: 2020-10-10
  * 
- * Contains information on the CPU character.
+ * Contains information on the character.
  * 
  * 2020-10-10: Added script.
  */
@@ -13,7 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CPUStats : MonoBehaviour
+public class CharacterStats : MonoBehaviour
 {
     // Stats
     public float speed = 3;

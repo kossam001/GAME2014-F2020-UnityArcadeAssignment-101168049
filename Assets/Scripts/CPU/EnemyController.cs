@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     private CPUSearch detection;
     [SerializeField]
     private CPUFire shooting;
-    public CPUStats stats;
+    public CharacterStats stats;
 
     // Update is called once per frame
     void Update()
