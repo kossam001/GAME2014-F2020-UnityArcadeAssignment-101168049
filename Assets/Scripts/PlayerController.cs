@@ -33,10 +33,10 @@ public class PlayerController : MonoBehaviour
         Turn();
         Fire();
 
-        Debug.Log("Turn Right? " + !CanTurnRight());
-        Debug.Log("Turn Left? " + !CanTurnLeft());
-        Debug.Log("Turn Back? " + CanTurnBack());
-        Debug.Log("See? " + Search());
+        //Debug.Log("Turn Right? " + !CanTurnRight());
+        //Debug.Log("Turn Left? " + !CanTurnLeft());
+        //Debug.Log("Turn Back? " + CanTurnBack());
+        //Debug.Log("See? " + Search());
     }
 
     private void Move()
