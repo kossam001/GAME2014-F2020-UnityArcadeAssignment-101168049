@@ -12,37 +12,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+[System.Serializable]
 public class Item : MonoBehaviour
 {
-    public enum ItemType
+    public Sprite sprite;
+    public SpriteRenderer renderer;
+    protected GameObject owner;
+
+    private void Start()
     {
-        meat,
-        shell,
-        egg,
-        pepper
+        renderer.sprite = sprite;
     }
 
-    ItemType itemID;
-    private GameObject owner;
-
-    public void Pickup()
+    public virtual void Pickup()
     {
-        switch (itemID)
-        {
-            case ItemType.meat:
-                Destroy(gameObject);
-                break;
-            case ItemType.shell:
-                Destroy(gameObject);
-                break;
-            case ItemType.egg:
-                Destroy(gameObject);
-                break;
-            case ItemType.pepper:
-                Destroy(gameObject);
-                break;
-        }
+        Destroy(gameObject);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
