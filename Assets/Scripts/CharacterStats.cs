@@ -1,4 +1,4 @@
-﻿/* CPUStats.cs
+﻿/* CharacterStats.cs
  * 
  * Samuel Ko
  * 101168049
