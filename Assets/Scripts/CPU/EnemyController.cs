@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-09
+ * Last Modified: 2020-10-10
  * 
  * Controls the enemy character.
  * 
@@ -10,7 +10,8 @@
  * 2020-10-08: Added turning.
  * 2020-10-08: Added random wandering.
  * 2020-10-09: Added chasing.
- * 2020-10-09: Refactored code.
+ * 2020-10-10: Refactored code.
+ * 2020-10-10: Updated Search code.
  */
 
 using System.Collections;
@@ -49,20 +50,30 @@ public class EnemyController : MonoBehaviour
 
     private void Search()
     {
-        CPUSearch.HitResult hitResult = detection.SearchForPlayer();
+        CPUSearch.HitResult hitResult = detection.SearchForObject();
 
         if (hitResult.resultDirection == CPUSearch.DetectionDirection.nothing)
         {
             return;
         }
 
-        // Close distance on enemy
-        stats.isChasing = true;
-        playerLastPos = hitResult.hitPos;
-        playerLastDir = hitResult.hitDir;
+        // Found Player
+        if (hitResult.hitObj == "Player")
+        {
+            // Close distance on enemy
+            stats.isChasing = true;
+            playerLastPos = hitResult.hitPos;
+            playerLastDir = hitResult.hitDir;
 
-        // Everytime the enemy is spotted during a chase, refresh timer
-        detection.refresh = true;
+            // Everytime the enemy is spotted during a chase, refresh timer
+            detection.refresh = true;
+        }
+        // Else found item
+        // Ignore if in a chase
+        else if (stats.isChasing && hitResult.hitObj == "Item")
+        {
+            return;
+        }
 
         // Right
         if (hitResult.resultDirection == CPUSearch.DetectionDirection.right)

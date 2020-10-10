@@ -10,6 +10,7 @@
  * 2020-10-09: Refactored code.
  * 2020-10-09: Added detecting back (Commented). 
  * 2020-10-10: Added a timeout for searching.
+ * 2020-10-10: AI will go towards items it sees.
  */
 
 using System.Collections;
@@ -34,51 +35,41 @@ public class CPUSearch : MonoBehaviour
         public DetectionDirection resultDirection = DetectionDirection.nothing;
         public Vector3 hitPos = Vector3.zero;
         public Vector3 hitDir = Vector3.zero;
+        public string hitObj;
     }
     
-    public HitResult SearchForPlayer()
+    public HitResult SearchForObject()
     {
         HitResult result = new HitResult();
 
         // Search front
-        SearchInDirection(DetectionDirection.front, transform.right, stats.detectionRange, "Player", ref result);
+        SearchInDirection(DetectionDirection.front, transform.right, stats.detectionRange, ref result);
 
         // Search right
-        SearchInDirection(DetectionDirection.right, -transform.up, stats.detectionRange * 0.5f, "Player", ref result);
+        SearchInDirection(DetectionDirection.right, -transform.up, stats.detectionRange * 0.5f, ref result);
 
         // Search left
-        SearchInDirection(DetectionDirection.left, transform.up, stats.detectionRange * 0.5f, "Player", ref result);
+        SearchInDirection(DetectionDirection.left, transform.up, stats.detectionRange * 0.5f, ref result);
 
-        //hit = Physics2D.Raycast(transform.position + -transform.right, -transform.right, stats.detectionRange * 0.3f, 0b1100000000);
+        // Search back
+        //SearchInDirection(DetectionDirection.back, -transform.right, stats.detectionRange * 0.3f, "Player", ref result);
 
-        //if (hit.collider)
-        //{
-        //    if (hit.collider.gameObject.tag == "Player")
-        //    {
-
-        //        result.resultDirection = DetectionDirection.back;
-        //        result.hitPos = hit.collider.bounds.center;
-        //        result.hitDir = hit.collider.gameObject.transform.right;
-
-        //        //Debug.Log("Chase Left " + result.hitPos);
-
-        //        return result;
-        //    }
-        //}
         return result;
     }
 
-    private void SearchInDirection(DetectionDirection direction, Vector3 dirVector, float range, string target, ref HitResult result)
+    private void SearchInDirection(DetectionDirection direction, Vector3 dirVector, float range, ref HitResult result)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + dirVector, dirVector, range, 0b1100000000);
 
         if (hit.collider)
         {
-            if (hit.collider.gameObject.tag == target)
+            if (hit.collider.gameObject.tag == "Player" ||
+                hit.collider.gameObject.tag == "Item")
             {
                 result.resultDirection = direction;
                 result.hitPos = hit.collider.bounds.center;
                 result.hitDir = hit.collider.gameObject.transform.right;
+                result.hitObj = hit.collider.gameObject.tag;
             }
         }
     }

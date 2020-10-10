@@ -10,7 +10,7 @@
  * 
  * 2020-10-06: Added this script.
  * 2020-10-07: Added collision handling.
- * 2020-10-10: Fireball speed modification
+ * 2020-10-10: Fireball speed modification.  Scales with player speed.
  */
 
 using System.Collections;

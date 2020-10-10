@@ -23,4 +23,5 @@ public class CharacterStats : MonoBehaviour
 
     // States
     public bool isChasing = false;
+    public bool isFetching = false;
 }
