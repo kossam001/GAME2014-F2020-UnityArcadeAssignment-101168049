@@ -9,6 +9,7 @@
  * 2020-10-09: Added script.
  * 2020-10-09: Refactored code.
  * 2020-10-09: Added detecting back (Commented). 
+ * 2020-10-10: Added a timeout for searching.
  */
 
 using System.Collections;
@@ -17,6 +18,8 @@ using UnityEngine;
 
 public class CPUSearch : MonoBehaviour
 {
+    public EnemyController CPUStat;
+
     public enum DetectionDirection
     {
         nothing,
@@ -106,5 +109,32 @@ public class CPUSearch : MonoBehaviour
         //}
 
         return result;
+    }
+
+    // Stop chasing when enemy is confirmed gone
+    // External control variables
+    public bool refresh = false; // So the chase doesn't end abruptly
+    public bool timerStarted = false; // Prevent multiple copies of Timeout()
+    public IEnumerator Timeout()
+    {
+        if (!timerStarted)
+        {
+            timerStarted = true;
+            float timeoutTimer = Random.Range(5, 10);
+
+            while (timeoutTimer > 0)
+            {
+                if (refresh)
+                {
+                    timeoutTimer = Random.Range(5, 10);
+                    refresh = false;
+                }
+                timeoutTimer -= Time.deltaTime;
+                yield return null;
+            }
+        }
+        timerStarted = false;
+        CPUStat.isChasing = false;
+        
     }
 }

@@ -21,6 +21,7 @@ public class CPUMove : MonoBehaviour
     private float speed = 3;
     [SerializeField]
     private float boxCastSize = 0.9f;
+    public CPUSearch search;
 
     public void Wander()
     {
@@ -54,7 +55,7 @@ public class CPUMove : MonoBehaviour
         // randomly turn right
         if (CanTurnRight() && !isTurning)
         {
-            if (MakeTurn("Right", -transform.up, -90, 0.25f))
+            if (MakeRightTurn(0.25f))
             {
                 return;
             }
@@ -64,7 +65,7 @@ public class CPUMove : MonoBehaviour
         // randomly turn left
         if (CanTurnLeft() && !isTurning)
         {
-            if (MakeTurn("Left", transform.up, 90, 0.25f))
+            if (MakeLeftTurn(0.25f))
             {
                 return;
             }
@@ -91,6 +92,23 @@ public class CPUMove : MonoBehaviour
         }
 
         return success;
+    }
+
+    // A series of simplified turning functions
+    // Use MakeTurn for specific angles
+    public bool MakeRightTurn(float probability = 1f)
+    {
+        return MakeTurn("Right", -transform.up, -90, probability);
+    }
+
+    public bool MakeLeftTurn(float probability = 1f)
+    {
+        return MakeTurn("Left", transform.up, 90, probability);
+    }
+
+    public bool MakeUTurn(float probability=1f)
+    {
+        return MakeTurn("Back", -transform.right, 180, probability);
     }
 
     // Gradually turn instead of snapping to the right direction
@@ -176,24 +194,21 @@ public class CPUMove : MonoBehaviour
             if (cross.z < 0)
                 turnAngle = -turnAngle;
 
-            Debug.Log("TURN " + turnAngle);
-
             Vector3 dir = transform.right;
 
             // Make the turns 90 degrees
             if (CanTurnRight() && turnAngle < -10 && !isTurning)
             {
-                turnAngle = -90;
-                dir = -transform.up;
-                MakeTurn("Chase enemy", dir, turnAngle, 1f);
+                MakeRightTurn();
             }
             else if (CanTurnLeft() && turnAngle > 10 && !isTurning)
             {
-                turnAngle = 90;
-                dir = transform.up;
-                MakeTurn("Chase enemy", dir, turnAngle, 1f);
+                MakeLeftTurn();
             }
-            isChasing = false;
+
+            // Don't start multiple coroutines for this 
+            if (!search.timerStarted)
+                StartCoroutine(search.Timeout());
         }
 
         if (ShouldTurnBack())
@@ -212,7 +227,7 @@ public class CPUMove : MonoBehaviour
         {
             if (ShouldTurnBack() && !isTurning)
             {
-                MakeTurn("Back", -transform.right, 180, 1f);
+                MakeUTurn();
             }
         }
 
@@ -223,22 +238,22 @@ public class CPUMove : MonoBehaviour
             {
                 if (Random.value > 0.5f)
                 {
-                    MakeTurn("Left", transform.up, 90, 1f);
+                    MakeLeftTurn();
                 }
                 else
                 {
-                    MakeTurn("Right", -transform.up, -90, 1f);
+                    MakeRightTurn();
                 }
             }
             // Can only go left
             else if (!canTurnRight && canTurnLeft)
             {
-                MakeTurn("Left", transform.up, 90, 1f);
+                MakeLeftTurn();
             }
             // Can only go right
             else if (!canTurnLeft && canTurnRight)
             {
-                MakeTurn("Right", -transform.up, -90, 1f);
+                MakeRightTurn();
             }
 
             isTurning = true;

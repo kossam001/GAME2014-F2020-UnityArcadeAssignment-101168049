@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
     private CPUMove movement;
     [SerializeField]
     private CPUSearch detection;
+    [SerializeField]
+    private CPUFire shooting;
 
     // Update is called once per frame
     void Update()
@@ -38,9 +40,10 @@ public class EnemyController : MonoBehaviour
             movement.Chase(playerLastPos, playerLastDir, ref isChasing);
         }
         Search();
+        shooting.Shoot();
     }
 
-    bool isChasing = false;
+    public bool isChasing = false;
     Vector3 playerLastPos;
     Vector3 playerLastDir;
 
@@ -57,6 +60,9 @@ public class EnemyController : MonoBehaviour
         isChasing = true;
         playerLastPos = hitResult.hitPos;
         playerLastDir = hitResult.hitDir;
+
+        // Everytime the enemy is spotted during a chase, refresh timer
+        detection.refresh = true;
 
         // Right
         if (hitResult.resultDirection == CPUSearch.DetectionDirection.right)
@@ -106,16 +112,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public bool shouldIgnoreWalls = false; // Stop OnTrigger for walls if it interferes with other behaviours
+
     // OnTriggerStay instead of OnTriggerEnter because 
     // OnTriggerEnter sometimes misses and event never happens.
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // This having priority over the chase logic will cause
-        // behavioural errors when chasing (turning in the wrong angle), so check if the
-        // enemy is not chasing
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 8 && !shouldIgnoreWalls)
         {
-            isChasing = false;
             movement.EncounterWall();
         }
         // Stop moving if player is very close
