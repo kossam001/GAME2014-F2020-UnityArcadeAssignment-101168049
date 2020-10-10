@@ -38,58 +38,16 @@ public class CPUSearch : MonoBehaviour
     
     public HitResult SearchForPlayer()
     {
-        // Search front
-        // Offset from the center of the sprite
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right, transform.right, stats.detectionRange, 0b1100000000);
         HitResult result = new HitResult();
 
-        if (hit.collider)
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                result.resultDirection = DetectionDirection.front;
-                result.hitPos = hit.collider.bounds.center;
-                result.hitDir = hit.collider.gameObject.transform.right;
-
-                //Debug.Log("Chase Front " + result.hitPos);
-
-                return result;
-            }
-        }
+        // Search front
+        SearchInDirection(DetectionDirection.front, transform.right, stats.detectionRange, "Player", ref result);
 
         // Search right
-        // Offset from the center of the sprite
-        hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, stats.detectionRange * 0.5f, 0b1100000000);
-
-        if (hit.collider)
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                result.resultDirection = DetectionDirection.right;
-                result.hitPos = hit.collider.bounds.center;
-                result.hitDir = hit.collider.gameObject.transform.right;
-
-                //Debug.Log("Chase Right " + result.hitPos);
-
-                return result;
-            }
-        }
+        SearchInDirection(DetectionDirection.right, -transform.up, stats.detectionRange * 0.5f, "Player", ref result);
 
         // Search left
-        // Offset from the center of the sprite
-        hit = Physics2D.Raycast(transform.position + transform.up, transform.up, stats.detectionRange * 0.5f, 0b1100000000);
-
-        if (hit.collider)
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                result.resultDirection = DetectionDirection.left;
-                result.hitPos = hit.collider.bounds.center;
-                result.hitDir = hit.collider.gameObject.transform.right;
-
-                return result;
-            }
-        }
+        SearchInDirection(DetectionDirection.left, transform.up, stats.detectionRange * 0.5f, "Player", ref result);
 
         //hit = Physics2D.Raycast(transform.position + -transform.right, -transform.right, stats.detectionRange * 0.3f, 0b1100000000);
 
@@ -107,8 +65,22 @@ public class CPUSearch : MonoBehaviour
         //        return result;
         //    }
         //}
-
         return result;
+    }
+
+    private void SearchInDirection(DetectionDirection direction, Vector3 dirVector, float range, string target, ref HitResult result)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + dirVector, dirVector, range, 0b1100000000);
+
+        if (hit.collider)
+        {
+            if (hit.collider.gameObject.tag == target)
+            {
+                result.resultDirection = direction;
+                result.hitPos = hit.collider.bounds.center;
+                result.hitDir = hit.collider.gameObject.transform.right;
+            }
+        }
     }
 
     // Stop chasing when enemy is confirmed gone
