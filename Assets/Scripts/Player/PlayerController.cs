@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         Turn();
         Fire();
 
+        cooldown -= Time.deltaTime;
         //Debug.Log("Turn Right? " + !CanTurnRight());
         //Debug.Log("Turn Left? " + !CanTurnLeft());
         //Debug.Log("Turn Back? " + CanTurnBack());
@@ -83,13 +84,21 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
+    float cooldown;
     private void Fire()
     {
+        if (cooldown > 0)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
             newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
+            cooldown = stats.firerate;
         }
+        
     }
 
     public float dist = 1.1f;

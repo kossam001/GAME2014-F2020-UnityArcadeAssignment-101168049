@@ -19,8 +19,8 @@ public class CharacterStats : MonoBehaviour
     public float speed = 3;
     public float maxSpeed = 10;
 
-    public float firerate = 3.5f;
-    public float maxFirerate = 1;
+    public float firerate = 1;
+    public float maxFirerate = 0.2f;
 
     public float health = 1;
     public float maxHealth = 5;

@@ -23,7 +23,7 @@ public class PepperEffect : Item
     public override void Pickup()
     {
         if (owner.GetComponent<CharacterStats>().firerate >= owner.GetComponent<CharacterStats>().maxFirerate)
-            owner.GetComponent<CharacterStats>().firerate -= 0.5f;
+            owner.GetComponent<CharacterStats>().firerate -= 0.1f;
 
         base.Pickup();
     }
