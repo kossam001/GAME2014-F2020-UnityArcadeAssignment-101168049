@@ -1,10 +1,10 @@
-﻿/* MeatEffect.cs
+﻿/* PepperEffect.cs
  * 
  * Samuel Ko
  * 101168049
  * Last Modified: 2020-10-10
  * 
- * Applies meat effect (movement + projectile speed up).
+ * Applies pepper effect (projectile firerate up).
  * 
  * 2020-10-10: Added script.
  */
@@ -13,8 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class MeatEffect : Item
+public class PepperEffect : Item
 {
     private void Start()
     {
@@ -23,8 +22,8 @@ public class MeatEffect : Item
 
     public override void Pickup()
     {
-        if (owner.GetComponent<CharacterStats>().speed <= owner.GetComponent<CharacterStats>().maxSpeed)
-            owner.GetComponent<CharacterStats>().speed++;
+        if (owner.GetComponent<CharacterStats>().firerate >= owner.GetComponent<CharacterStats>().maxFirerate)
+            owner.GetComponent<CharacterStats>().firerate -= 0.5f;
 
         base.Pickup();
     }
