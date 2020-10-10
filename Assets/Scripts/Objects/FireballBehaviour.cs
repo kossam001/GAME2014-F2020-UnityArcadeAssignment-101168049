@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-07
+ * Last Modified: 2020-10-10
  * 
  * To be attached to a fireball GameObject.
  * What a fireball is supposed to move forward until it collides with something
@@ -10,6 +10,7 @@
  * 
  * 2020-10-06: Added this script.
  * 2020-10-07: Added collision handling.
+ * 2020-10-10: Fireball speed modification
  */
 
 using System.Collections;
@@ -31,6 +32,11 @@ public class FireballBehaviour : MonoBehaviour
     void Update()
     {
         Move();
+
+        // Fireballs should travel faster than owner
+        if (owner)
+        {
+        }
     }
 
     private void Move()
