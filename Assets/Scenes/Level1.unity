@@ -8763,6 +8763,7 @@ GameObject:
   - component: {fileID: 1890741236}
   - component: {fileID: 1890741235}
   - component: {fileID: 1890741237}
+  - component: {fileID: 1890741238}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -8903,7 +8904,7 @@ MonoBehaviour:
   movement: {fileID: 1890741236}
   detection: {fileID: 1890741235}
   shooting: {fileID: 1890741237}
-  isChasing: 0
+  stats: {fileID: 1890741238}
   shouldIgnoreWalls: 0
 --- !u!114 &1890741235
 MonoBehaviour:
@@ -8917,7 +8918,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe366623004200469554a4dcd143878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CPUStat: {fileID: 1890741234}
+  stats: {fileID: 1890741238}
+  refresh: 0
+  timerStarted: 0
 --- !u!114 &1890741236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8930,9 +8933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4afdf4f2365f74381ebefde4e67f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   boxCastSize: 0.9
   search: {fileID: 1890741235}
+  stats: {fileID: 1890741238}
   isTurning: 0
 --- !u!114 &1890741237
 MonoBehaviour:
@@ -8948,7 +8951,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 1890741236}
   fireball: {fileID: 1764842702609456422, guid: 6768cce46fdf9414883e1c13bee72563, type: 3}
-  CPUStat: {fileID: 1890741234}
+  stats: {fileID: 1890741238}
+--- !u!114 &1890741238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890741228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd212ade4568724493343bbe839204c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  isChasing: 0
 --- !u!1 &1892266906
 GameObject:
   m_ObjectHideFlags: 0

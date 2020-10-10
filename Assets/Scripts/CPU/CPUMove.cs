@@ -18,10 +18,9 @@ using UnityEngine;
 public class CPUMove : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 3;
-    [SerializeField]
     private float boxCastSize = 0.9f;
     public CPUSearch search;
+    public CPUStats stats;
 
     public void Wander()
     {
@@ -32,8 +31,8 @@ public class CPUMove : MonoBehaviour
     public void Move()
     {
         // moves character by getting axis value - keyboard input 
-        transform.position += new Vector3(transform.right.x * speed * Time.deltaTime,
-                                          transform.right.y * speed * Time.deltaTime,
+        transform.position += new Vector3(transform.right.x * stats.speed * Time.deltaTime,
+                                          transform.right.y * stats.speed * Time.deltaTime,
                                           0.0f);
     }
 

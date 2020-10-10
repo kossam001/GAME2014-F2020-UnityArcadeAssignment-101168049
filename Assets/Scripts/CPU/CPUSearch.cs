@@ -18,7 +18,7 @@ using UnityEngine;
 
 public class CPUSearch : MonoBehaviour
 {
-    public EnemyController CPUStat;
+    public CPUStats stats;
 
     public enum DetectionDirection
     {
@@ -40,7 +40,7 @@ public class CPUSearch : MonoBehaviour
     {
         // Search front
         // Offset from the center of the sprite
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right, transform.right, 15, 0b1100000000);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right, transform.right, stats.detectionRange, 0b1100000000);
         HitResult result = new HitResult();
 
         if (hit.collider)
@@ -59,7 +59,7 @@ public class CPUSearch : MonoBehaviour
 
         // Search right
         // Offset from the center of the sprite
-        hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, 7, 0b1100000000);
+        hit = Physics2D.Raycast(transform.position + -transform.up, -transform.up, stats.detectionRange * 0.5f, 0b1100000000);
 
         if (hit.collider)
         {
@@ -77,7 +77,7 @@ public class CPUSearch : MonoBehaviour
 
         // Search left
         // Offset from the center of the sprite
-        hit = Physics2D.Raycast(transform.position + transform.up, transform.up, 7, 0b1100000000);
+        hit = Physics2D.Raycast(transform.position + transform.up, transform.up, stats.detectionRange * 0.5f, 0b1100000000);
 
         if (hit.collider)
         {
@@ -91,7 +91,7 @@ public class CPUSearch : MonoBehaviour
             }
         }
 
-        //hit = Physics2D.Raycast(transform.position + -transform.right, -transform.right, 5, 0b1100000000);
+        //hit = Physics2D.Raycast(transform.position + -transform.right, -transform.right, stats.detectionRange * 0.3f, 0b1100000000);
 
         //if (hit.collider)
         //{
@@ -134,7 +134,7 @@ public class CPUSearch : MonoBehaviour
             }
         }
         timerStarted = false;
-        CPUStat.isChasing = false;
+        stats.isChasing = false;
         
     }
 }

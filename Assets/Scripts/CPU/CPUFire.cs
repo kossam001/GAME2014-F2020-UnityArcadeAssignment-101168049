@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-09
+ * Last Modified: 2020-10-10
  * 
  * Script containing functions for CPU Attack.
  * 
@@ -18,7 +18,7 @@ public class CPUFire : MonoBehaviour
     [SerializeField]
     private CPUMove movement;
     public GameObject fireball;
-    public EnemyController CPUStat;
+    public CPUStats stats;
 
     // Update is called once per frame
     void Update()
@@ -29,7 +29,7 @@ public class CPUFire : MonoBehaviour
 
     private void ShootRight()
     {
-        if (CPUStat.isChasing)
+        if (stats.isChasing)
         {
             return;
         }
@@ -40,7 +40,7 @@ public class CPUFire : MonoBehaviour
 
     private void ShootLeft()
     {
-        if (CPUStat.isChasing)
+        if (stats.isChasing)
         {
             return;
         }
@@ -49,7 +49,7 @@ public class CPUFire : MonoBehaviour
         movement.MakeLeftTurn();
     }
 
-    float cooldown = Random.Range(1f, 3f);
+    float cooldown;
     public void Shoot()
     {
         if (!CanShoot())
@@ -77,7 +77,7 @@ public class CPUFire : MonoBehaviour
             return false;
         }
 
-        cooldown = Random.Range(1f, 3f); 
+        cooldown = Random.Range(1f, stats.firerate); 
         return true;
     }
 }

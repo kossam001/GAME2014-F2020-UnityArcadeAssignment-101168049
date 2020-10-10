@@ -26,24 +26,24 @@ public class EnemyController : MonoBehaviour
     private CPUSearch detection;
     [SerializeField]
     private CPUFire shooting;
+    public CPUStats stats;
 
     // Update is called once per frame
     void Update()
     {
-        if (!isChasing)
+        if (!stats.isChasing)
         {
             movement.Wander();
         }
-        else if (isChasing)
+        else if (stats.isChasing)
         {
             movement.Move();
-            movement.Chase(playerLastPos, playerLastDir, ref isChasing);
+            movement.Chase(playerLastPos, playerLastDir, ref stats.isChasing);
         }
         Search();
         shooting.Shoot();
     }
-
-    public bool isChasing = false;
+    
     Vector3 playerLastPos;
     Vector3 playerLastDir;
 
@@ -55,9 +55,9 @@ public class EnemyController : MonoBehaviour
         {
             return;
         }
-        
+
         // Close distance on enemy
-        isChasing = true;
+        stats.isChasing = true;
         playerLastPos = hitResult.hitPos;
         playerLastDir = hitResult.hitDir;
 
