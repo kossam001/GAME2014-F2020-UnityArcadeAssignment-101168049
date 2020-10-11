@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public CharacterStats stats;
     public GameObject fireball;
     public float size = 0.9f;
+    public FireballManager fireballManager;
 
     // Start is called before the first frame update
     void Start()
@@ -94,8 +95,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
-            newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
+            GameObject fireball = fireballManager.fireballs.Dequeue();
+            fireball.transform.position = transform.position;
+            fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
+            fireball.GetComponent<FireballBehaviour>().owner = gameObject;
+            fireball.SetActive(true);
+            //GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
+            //newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
             cooldown = stats.firerate;
         }
         

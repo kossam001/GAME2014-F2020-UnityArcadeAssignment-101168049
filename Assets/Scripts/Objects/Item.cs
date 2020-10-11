@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     public Sprite sprite;
     public SpriteRenderer renderer;
     protected GameObject owner;
-    public GameManager gameManager;
+    public ItemManager manager;
 
     private void Start()
     {
@@ -30,11 +30,11 @@ public class Item : MonoBehaviour
 
     public virtual void Pickup()
     {
-        gameManager.inactiveItems.Add(gameObject);
-        gameManager.activeItems.Remove(gameObject);
+        manager.inactiveItems.Add(gameObject);
+        manager.activeItems.Remove(gameObject);
         gameObject.SetActive(false);
 
-        gameManager.itemsSpawned--;
+        manager.itemsSpawned--;
     }
 
     private void OnCollisionStay2D(Collision2D collision)

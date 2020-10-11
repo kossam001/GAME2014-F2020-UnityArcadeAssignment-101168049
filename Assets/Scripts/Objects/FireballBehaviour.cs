@@ -21,6 +21,7 @@ public class FireballBehaviour : MonoBehaviour
 {
     public float speed;
     public GameObject owner;
+    public FireballManager manager;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +50,9 @@ public class FireballBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag == "StaticObstacle")
         {
-            Destroy(gameObject);
+            manager.fireballs.Enqueue(gameObject);
+            gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 }
