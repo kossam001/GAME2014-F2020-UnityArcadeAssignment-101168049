@@ -3707,7 +3707,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 729000894}
   - {fileID: 778127147}
-  maxEnemiesActive: 5
+  maxEnemiesActive: 1
   enemies: []
   activeEnemies: []
 --- !u!1 &729000894

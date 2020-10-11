@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
             fireball.transform.position = transform.position;
             fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
             fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().speed + 1.5f;
+            fireball.GetComponent<FireballBehaviour>().owner = gameObject;
             fireball.SetActive(true);
             //GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
             //newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected

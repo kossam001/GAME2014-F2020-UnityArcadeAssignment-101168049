@@ -20,6 +20,7 @@ using UnityEngine;
 public class FireballBehaviour : MonoBehaviour
 {
     public float speed;
+    public GameObject owner;
     public FireballManager manager;
     public bool despawn = false;
 
@@ -37,6 +38,7 @@ public class FireballBehaviour : MonoBehaviour
         // Fireball needs to be despawned by something, have it raise a flag
         if (despawn)
         {
+            owner = null;
             gameObject.SetActive(false);
             manager.fireballs.Enqueue(gameObject);
             despawn = false;
@@ -55,6 +57,23 @@ public class FireballBehaviour : MonoBehaviour
             manager.fireballs.Enqueue(gameObject);
             gameObject.SetActive(false);
             //Destroy(gameObject);
+        }
+        else if (owner != null)
+        {
+            if (collision.gameObject.tag == "CPU" && !ReferenceEquals(collision.gameObject, owner))
+            {
+                owner = null;
+                collision.gameObject.GetComponent<CharacterStats>().health--;
+                manager.fireballs.Enqueue(gameObject);
+                gameObject.SetActive(false);
+            }
+            else if (collision.gameObject.tag == "Player" && !ReferenceEquals(collision.gameObject, owner))
+            {
+                owner = null;
+                collision.gameObject.GetComponent<CharacterStats>().health--;
+                manager.fireballs.Enqueue(gameObject);
+                gameObject.SetActive(false);
+            }
         }
     }
 }
