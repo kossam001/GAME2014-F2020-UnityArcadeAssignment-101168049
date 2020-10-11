@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
         }
         // Else found item
         // Ignore if in a chase
-        else if (!stats.isChasing && hitResult.hitObj == "Item")
+        else if (stats.isChasing && hitResult.hitObj == "Item")
         {
             return;
         }

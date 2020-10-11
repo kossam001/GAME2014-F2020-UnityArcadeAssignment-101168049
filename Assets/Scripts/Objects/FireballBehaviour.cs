@@ -20,8 +20,8 @@ using UnityEngine;
 public class FireballBehaviour : MonoBehaviour
 {
     public float speed;
-    public GameObject owner;
     public FireballManager manager;
+    public bool despawn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +34,12 @@ public class FireballBehaviour : MonoBehaviour
     {
         Move();
 
-        // Fireballs should travel faster than owner
-        if (owner)
+        // Fireball needs to be despawned by something, have it raise a flag
+        if (despawn)
         {
-            speed = owner.GetComponent<CharacterStats>().speed + 1.5f;
+            gameObject.SetActive(false);
+            manager.fireballs.Enqueue(gameObject);
+            despawn = false;
         }
     }
 

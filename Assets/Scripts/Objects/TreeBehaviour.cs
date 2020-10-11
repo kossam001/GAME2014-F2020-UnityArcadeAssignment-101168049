@@ -41,7 +41,10 @@ public class TreeBehaviour : MonoBehaviour
             if (tilemap.HasTile(tilePos))
             {
                 tilemap.SetTile(tilePos, null); // Remove tree tile
-                Destroy(collision.gameObject); // Despawning of projectiles here since the world WorldToCell is not very precise
+
+                collision.gameObject.GetComponent<FireballBehaviour>().despawn = true; // Raise the flag, don't do it on its own
+                    // or collider bugs.
+                //Destroy(collision.gameObject); // Despawning of projectiles here since the world WorldToCell is not very precise
             }
         }
     }
