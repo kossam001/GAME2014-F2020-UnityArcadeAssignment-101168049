@@ -1,40 +1,36 @@
-﻿/* GameManager.cs
+﻿/* ItemManager.cs
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-10
+ * Last Modified: 2020-10-11
  * 
- * Manages different aspects of the game such as score, spawning, stat changes, etc.
+ * Manages item spawning.
  * 
- * 2020-10-10: Added script.
+ * 2020-10-11: Added script.
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
     public int itemsSpawned = 0;
     public List<GameObject> inactiveItems;
     public List<GameObject> activeItems;
 
     public List<GameObject> itemPrefabs;
-    public GameObject fireballPrefab;
-    public List<GameObject> enemyPrefabs;
 
-    public List<GameObject> fireballs;
-    public List<GameObject> enemies;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         foreach (GameObject item in itemPrefabs)
         {
-            for (int i=0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 GameObject newItem = Instantiate(item, transform);
                 newItem.SetActive(false);
-                newItem.GetComponent<Item>().gameManager = this;
+                newItem.GetComponent<Item>().manager = this;
 
                 inactiveItems.Add(newItem);
             }

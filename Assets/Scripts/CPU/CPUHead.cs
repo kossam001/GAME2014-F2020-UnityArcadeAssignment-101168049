@@ -26,7 +26,6 @@ public class CPUHead : MonoBehaviour
         if (collision.gameObject.layer == 8 || collision.gameObject.layer == 10)
         {
             movement.EncounterWall();
-            Debug.Log(collision.gameObject);
         }
         // Stop moving if player is very close
         if (collision.gameObject.tag == "Player")

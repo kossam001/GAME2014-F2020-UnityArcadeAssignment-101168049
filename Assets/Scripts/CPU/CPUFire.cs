@@ -19,6 +19,7 @@ public class CPUFire : MonoBehaviour
     private CPUMove movement;
     public GameObject fireball;
     public CharacterStats stats;
+    public FireballManager fireballManager;
 
     // Update is called once per frame
     void Update()
@@ -66,8 +67,13 @@ public class CPUFire : MonoBehaviour
             ShootRight();
         }
 
-        GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
-        newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
+        GameObject fireball = fireballManager.fireballs.Dequeue();
+        fireball.transform.position = transform.position;
+        fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
+        fireball.GetComponent<FireballBehaviour>().owner = gameObject;
+        fireball.SetActive(true);
+
+        cooldown = Random.Range(stats.firerate, 3f);
     }
 
     private bool CanShoot()
@@ -76,8 +82,7 @@ public class CPUFire : MonoBehaviour
         {
             return false;
         }
-
-        cooldown = Random.Range(stats.firerate, 1.5f); 
+ 
         return true;
     }
 }

@@ -60,8 +60,6 @@ public class EnemyController : MonoBehaviour
         // Found Player
         if (hitResult.hitObj == "Player")
         {
-            Debug.Log(hitResult.hitObj);
-
             // Close distance on enemy
             stats.isChasing = true;
             playerLastPos = hitResult.hitPos;
@@ -72,7 +70,7 @@ public class EnemyController : MonoBehaviour
         }
         // Else found item
         // Ignore if in a chase
-        else if (stats.isChasing && hitResult.hitObj == "Item")
+        else if (!stats.isChasing && hitResult.hitObj == "Item")
         {
             return;
         }
