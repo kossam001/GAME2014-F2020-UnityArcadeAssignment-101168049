@@ -133,7 +133,7 @@ public class CPUMove : MonoBehaviour
     {
         // Cast a box ray that determines whether or not the character can fit into a passage
         RaycastHit2D hit = Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
-            new Vector2(boxCastSize, boxCastSize), 0, -transform.up, 1, 0x0100);
+            new Vector2(boxCastSize, boxCastSize), 0, -transform.up, 1, 0b10100000000);
 
         if (hit)
         {
@@ -148,7 +148,7 @@ public class CPUMove : MonoBehaviour
     {
         // Check for obstructions on the right
         RaycastHit2D hit = Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
-            new Vector2(boxCastSize, boxCastSize), 0, transform.up, 1, 0x0100);
+            new Vector2(boxCastSize, boxCastSize), 0, transform.up, 1, 0b10100000000);
 
         // if there was a hit
         if (hit)
@@ -163,7 +163,7 @@ public class CPUMove : MonoBehaviour
     public bool ShouldTurnBack()
     {
         RaycastHit2D hit = Physics2D.BoxCast(transform.position,
-            new Vector2(boxCastSize * 0.1f, boxCastSize * 0.1f), 0, transform.right, 1.1f, 0x0100);
+            new Vector2(boxCastSize * 0.1f, boxCastSize * 0.1f), 0, transform.right, 1.1f, 0b10100000000);
 
         if (hit)
         {

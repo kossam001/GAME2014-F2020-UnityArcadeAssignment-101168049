@@ -7,6 +7,7 @@
  * Picking up an item should give an effect.
  * 
  * 2020-10-10: Added script.
+ * 2020-10-10: Items become disabled instead of destroyed when used.
  */
 
 using System.Collections;
@@ -20,6 +21,7 @@ public class Item : MonoBehaviour
     public Sprite sprite;
     public SpriteRenderer renderer;
     protected GameObject owner;
+    public GameManager gameManager;
 
     private void Start()
     {
@@ -28,7 +30,11 @@ public class Item : MonoBehaviour
 
     public virtual void Pickup()
     {
-        Destroy(gameObject);
+        gameManager.inactiveItems.Add(gameObject);
+        gameManager.activeItems.Remove(gameObject);
+        gameObject.SetActive(false);
+
+        gameManager.itemsSpawned--;
     }
 
     private void OnCollisionStay2D(Collision2D collision)

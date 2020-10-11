@@ -77,7 +77,7 @@ public class CPUFire : MonoBehaviour
             return false;
         }
 
-        cooldown = stats.firerate; 
+        cooldown = Random.Range(stats.firerate, 1.5f); 
         return true;
     }
 }

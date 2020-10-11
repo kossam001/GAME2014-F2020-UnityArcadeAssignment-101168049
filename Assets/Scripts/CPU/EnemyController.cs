@@ -60,6 +60,8 @@ public class EnemyController : MonoBehaviour
         // Found Player
         if (hitResult.hitObj == "Player")
         {
+            Debug.Log(hitResult.hitObj);
+
             // Close distance on enemy
             stats.isChasing = true;
             playerLastPos = hitResult.hitPos;
@@ -120,23 +122,6 @@ public class EnemyController : MonoBehaviour
                 20 * Time.deltaTime * -character.transform.right;
 
             yield return null;
-        }
-    }
-
-    public bool shouldIgnoreWalls = false; // Stop OnTrigger for walls if it interferes with other behaviours
-
-    // OnTriggerStay instead of OnTriggerEnter because 
-    // OnTriggerEnter sometimes misses and event never happens.
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 8 && !shouldIgnoreWalls)
-        {
-            movement.EncounterWall();
-        }
-        // Stop moving if player is very close
-        if (collision.gameObject.tag == "Player")
-        {
-
         }
     }
 }

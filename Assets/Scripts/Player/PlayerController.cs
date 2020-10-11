@@ -106,19 +106,19 @@ public class PlayerController : MonoBehaviour
     private bool CanTurnBack()
     {
         return Physics2D.BoxCast(transform.position,
-    new Vector2(size * scale, size * scale), 0, transform.right, dist, 0x0100);
+    new Vector2(size * scale, size * scale), 0, transform.right, dist, 0b10100000000);
     }
 
     private bool CanTurnRight()
     {
         return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
-            new Vector2(size, size), 0, -transform.up, 3, 0x0100);
+            new Vector2(size, size), 0, -transform.up, 3, 0b10100000000);
     }
 
     private bool CanTurnLeft()
     {
         return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
-            new Vector2(size, size), 0, transform.up, 3, 0x0100);
+            new Vector2(size, size), 0, transform.up, 3, 0b10100000000);
     }
 
     public float sight = 10;
