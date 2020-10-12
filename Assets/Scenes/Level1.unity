@@ -3707,8 +3707,9 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 729000894}
   - {fileID: 778127147}
-  maxEnemiesActive: 1
-  enemies: []
+  numEnemiesActive: 0
+  maxEnemiesActive: 5
+  inactiveEnemies: []
   activeEnemies: []
 --- !u!1 &729000894
 GameObject:
@@ -3734,7 +3735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729000894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16, y: 20, z: 0}
+  m_LocalPosition: {x: -15, y: 19, z: 0}
   m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_Children: []
   m_Father: {fileID: 725344106}
@@ -4005,7 +4006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778127147}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 12, y: 20, z: 0}
+  m_LocalPosition: {x: 11, y: 19, z: 0}
   m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_Children: []
   m_Father: {fileID: 725344106}
@@ -8989,6 +8990,7 @@ MonoBehaviour:
   maxHealth: 5
   detectionRange: 15
   isChasing: 0
+  isDead: 0
 --- !u!1 &1886691114
 GameObject:
   m_ObjectHideFlags: 0

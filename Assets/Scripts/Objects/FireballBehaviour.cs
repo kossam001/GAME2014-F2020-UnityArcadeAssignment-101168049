@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-10
+ * Last Modified: 2020-10-11
  * 
  * To be attached to a fireball GameObject.
  * What a fireball is supposed to move forward until it collides with something
@@ -11,6 +11,8 @@
  * 2020-10-06: Added this script.
  * 2020-10-07: Added collision handling.
  * 2020-10-10: Fireball speed modification.  Scales with player speed.
+ * 2020-10-11: Fireball collisions with other objects.
+ * 2020-10-11: Fireballs do not get destroyed.
  */
 
 using System.Collections;
@@ -58,14 +60,28 @@ public class FireballBehaviour : MonoBehaviour
             gameObject.SetActive(false);
             //Destroy(gameObject);
         }
+        // Projectiles destroy other projectiles
+        else if (collision.gameObject.tag == "Projectile")
+        {
+            manager.fireballs.Enqueue(gameObject);
+            gameObject.SetActive(false);
+        }
         else if (owner != null)
         {
-            if (collision.gameObject.tag == "CPU" && !ReferenceEquals(collision.gameObject, owner))
+            if (collision.gameObject.tag == "CPU" && 
+                !ReferenceEquals(collision.gameObject, owner) &&
+                owner.tag != "CPU") // CPUs should not be able to kill other CPUs
             {
                 owner = null;
                 collision.gameObject.GetComponent<CharacterStats>().health--;
                 manager.fireballs.Enqueue(gameObject);
                 gameObject.SetActive(false);
+
+                // Enemy dead if health = 0
+                if (collision.gameObject.GetComponent<CharacterStats>().health <= 0)
+                {
+                    collision.gameObject.GetComponent<CharacterStats>().isDead = true;
+                }
             }
             else if (collision.gameObject.tag == "Player" && !ReferenceEquals(collision.gameObject, owner))
             {

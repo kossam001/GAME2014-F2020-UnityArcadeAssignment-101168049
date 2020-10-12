@@ -7,6 +7,7 @@
  * Manages enemy spawning.
  * 
  * 2020-10-11: Added script.
+ * 2020-10-11: Setup despawn.
  */
 
 using System.Collections;
@@ -21,12 +22,12 @@ public class EnemyManager : MonoBehaviour
     public List<GameObject> spawnPoints; 
 
     // Spawn data
-    private int numEnemiesActive;
+    public int numEnemiesActive;
     public int maxEnemiesActive = 5;
     private float spawnTimer = 0;
 
     // Data structures
-    public List<GameObject> enemies;
+    public List<GameObject> inactiveEnemies;
     public List<GameObject> activeEnemies;
 
     // Start is called before the first frame update
@@ -37,11 +38,12 @@ public class EnemyManager : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 GameObject newEnemy = Instantiate(CPU, transform);
+                newEnemy.GetComponent<EnemyController>().manager = this;
                 newEnemy.GetComponent<CPUFire>().fireballManager = fireballManager;
                 newEnemy.SetActive(false);
                 //newEnemy.GetComponent<Item>().gameManager = this;
 
-                enemies.Add(newEnemy);
+                inactiveEnemies.Add(newEnemy);
             }
         }
     }
@@ -61,8 +63,16 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        int randomIndex = Random.Range(0, enemies.Count - 1);
-        GameObject spawnedEnemy = enemies[randomIndex];
+        Spawn();
+
+        // Reset timer
+        spawnTimer = Random.Range(3f, 10f);
+    }
+
+    private void Spawn()
+    {
+        int randomIndex = Random.Range(0, inactiveEnemies.Count - 1);
+        GameObject spawnedEnemy = inactiveEnemies[randomIndex];
         activeEnemies.Add(spawnedEnemy);
 
         // Set transform
@@ -73,9 +83,6 @@ public class EnemyManager : MonoBehaviour
         spawnedEnemy.SetActive(true);
         numEnemiesActive++;
 
-        enemies.RemoveAt(randomIndex);
-
-        // Reset timer
-        spawnTimer = Random.Range(3f, 10f);
+        inactiveEnemies.RemoveAt(randomIndex);
     }
 }

@@ -2,13 +2,14 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-07
+ * Last Modified: 2020-10-11
  * 
  * Trees should block other characters.
  * They should disappear when hit with a fireball.
  * A fireball that hits a tree should disappear.
  * 
  * 2020-10-07: Added this script.
+ * 2020-10-11: Trees don't destroy fireballs.
  */
 
 using System.Collections;

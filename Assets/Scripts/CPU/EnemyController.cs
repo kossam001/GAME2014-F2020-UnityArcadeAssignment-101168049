@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-10
+ * Last Modified: 2020-10-11
  * 
  * Controls the enemy character.
  * 
@@ -12,6 +12,7 @@
  * 2020-10-09: Added chasing.
  * 2020-10-10: Refactored code.
  * 2020-10-10: Updated Search code.
+ * 2020-10-11: Added Despawn.
  */
 
 using System.Collections;
@@ -28,10 +29,17 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private CPUFire shooting;
     public CharacterStats stats;
+    public EnemyManager manager;
 
     // Update is called once per frame
     void Update()
     {
+        // Cleanup dead enemies inside own script instead of outside
+        if (stats.isDead)
+        {
+            Despawn();
+        }
+
         if (!stats.isChasing)
         {
             movement.Wander();
@@ -121,5 +129,14 @@ public class EnemyController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void Despawn()
+    {
+        manager.inactiveEnemies.Add(gameObject);
+        manager.activeEnemies.Remove(gameObject);
+        manager.numEnemiesActive--;
+        stats.isDead = false;
+        gameObject.SetActive(false);
     }
 }

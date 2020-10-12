@@ -2,11 +2,12 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-10
+ * Last Modified: 2020-10-11
  * 
  * Contains information on the character.
  * 
  * 2020-10-10: Added script.
+ * 2020-10-11: Added death state.
  */
 
 using System.Collections;
@@ -29,4 +30,5 @@ public class CharacterStats : MonoBehaviour
 
     // States
     public bool isChasing = false;
+    public bool isDead = false;
 }
