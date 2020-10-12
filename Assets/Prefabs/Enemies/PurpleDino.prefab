@@ -15,6 +15,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3a59c7a85e532224da96e59a8e5bd45f, type: 3}
+    - target: {fileID: 7986100623772113925, guid: ea037e6905542fd4186e7f0e7a498bf5, type: 3}
+      propertyPath: firerate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986100623772113925, guid: ea037e6905542fd4186e7f0e7a498bf5, type: 3}
+      propertyPath: maxFirerate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986100623772113925, guid: ea037e6905542fd4186e7f0e7a498bf5, type: 3}
+      propertyPath: health
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7986100623772113950, guid: ea037e6905542fd4186e7f0e7a498bf5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

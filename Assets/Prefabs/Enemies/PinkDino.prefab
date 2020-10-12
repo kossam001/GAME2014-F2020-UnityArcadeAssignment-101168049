@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &6954312058156191693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986100623772113951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfbc46eb52ed384098d713dc18f5af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 15
+  shieldDuration: 5
 --- !u!1001 &4776317286767983459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,6 +25,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: cfed7caeba7d28d449a5580e58f43acf, type: 3}
+    - target: {fileID: 3214645928521279334, guid: 43ff1f1f6a6fdc04a8fa8c8c50454b21, type: 3}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3214645928521279356, guid: 43ff1f1f6a6fdc04a8fa8c8c50454b21, type: 3}
       propertyPath: m_Name
       value: PinkDino
@@ -69,3 +87,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43ff1f1f6a6fdc04a8fa8c8c50454b21, type: 3}
+--- !u!1 &7986100623772113951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3214645928521279356, guid: 43ff1f1f6a6fdc04a8fa8c8c50454b21, type: 3}
+  m_PrefabInstance: {fileID: 4776317286767983459}
+  m_PrefabAsset: {fileID: 0}

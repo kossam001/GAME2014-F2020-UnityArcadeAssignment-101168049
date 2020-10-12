@@ -67,6 +67,18 @@ PrefabInstance:
       propertyPath: shieldSprite
       value: 
       objectReference: {fileID: 6600494404363081741}
+    - target: {fileID: 2340380006024704413, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
+      propertyPath: speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340380006024704413, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
+      propertyPath: maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340380006024704413, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
+      propertyPath: health
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3609563770610560401, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
       propertyPath: m_RootOrder
       value: 1
