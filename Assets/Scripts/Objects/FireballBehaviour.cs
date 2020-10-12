@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-11
+ * Last Modified: 2020-10-12
  * 
  * To be attached to a fireball GameObject.
  * What a fireball is supposed to move forward until it collides with something
@@ -13,6 +13,7 @@
  * 2020-10-10: Fireball speed modification.  Scales with player speed.
  * 2020-10-11: Fireball collisions with other objects.
  * 2020-10-11: Fireballs do not get destroyed.
+ * 2020-10-12: Added Nest collision.
  */
 
 using System.Collections;
@@ -25,6 +26,8 @@ public class FireballBehaviour : MonoBehaviour
     public GameObject owner;
     public FireballManager manager;
     public bool despawn = false;
+
+    private int points = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -58,11 +61,23 @@ public class FireballBehaviour : MonoBehaviour
         {
             manager.fireballs.Enqueue(gameObject);
             gameObject.SetActive(false);
-            //Destroy(gameObject);
         }
         // Projectiles destroy other projectiles
         else if (collision.gameObject.tag == "Projectile")
         {
+            if (owner.tag == "Player")
+            {
+                GameManager.Instance.AddScore(points);
+            }
+
+            manager.fireballs.Enqueue(gameObject);
+            gameObject.SetActive(false);
+        }
+        // It is possible to destroy own nest
+        else if (collision.gameObject.name == "Nest")
+        {
+            collision.gameObject.GetComponent<Nest>().DecreaseHealth();
+
             manager.fireballs.Enqueue(gameObject);
             gameObject.SetActive(false);
         }
