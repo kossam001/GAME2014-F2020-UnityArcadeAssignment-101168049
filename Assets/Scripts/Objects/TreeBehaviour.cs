@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-11
+ * Last Modified: 2020-10-12
  * 
  * Trees should block other characters.
  * They should disappear when hit with a fireball.
@@ -10,6 +10,7 @@
  * 
  * 2020-10-07: Added this script.
  * 2020-10-11: Trees don't destroy fireballs.
+ * 2020-10-12: Added points.
  */
 
 using System.Collections;
@@ -20,18 +21,8 @@ using UnityEngine.Tilemaps;
 public class TreeBehaviour : MonoBehaviour
 {
     public Tilemap tilemap;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private int points = 100;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -44,8 +35,9 @@ public class TreeBehaviour : MonoBehaviour
                 tilemap.SetTile(tilePos, null); // Remove tree tile
 
                 collision.gameObject.GetComponent<FireballBehaviour>().despawn = true; // Raise the flag, don't do it on its own
-                    // or collider bugs.
-                //Destroy(collision.gameObject); // Despawning of projectiles here since the world WorldToCell is not very precise
+                                                                                       // or collider bugs.
+
+                GameManager.Instance.AddScore(points);
             }
         }
     }

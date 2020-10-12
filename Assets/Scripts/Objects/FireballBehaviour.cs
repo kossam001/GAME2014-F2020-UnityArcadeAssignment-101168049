@@ -27,7 +27,7 @@ public class FireballBehaviour : MonoBehaviour
     public FireballManager manager;
     public bool despawn = false;
 
-    private int points = 50;
+    private int points = 250;
 
     // Start is called before the first frame update
     void Start()
