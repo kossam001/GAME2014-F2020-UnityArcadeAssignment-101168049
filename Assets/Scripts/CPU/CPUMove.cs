@@ -31,8 +31,8 @@ public class CPUMove : MonoBehaviour
     public void Move()
     {
         // moves character by getting axis value - keyboard input 
-        transform.position += new Vector3(transform.right.x * stats.speed * Time.deltaTime,
-                                          transform.right.y * stats.speed * Time.deltaTime,
+        transform.position += new Vector3(transform.right.x * stats.GetSpeed() * Time.deltaTime,
+                                          transform.right.y * stats.GetSpeed() * Time.deltaTime,
                                           0.0f);
     }
 

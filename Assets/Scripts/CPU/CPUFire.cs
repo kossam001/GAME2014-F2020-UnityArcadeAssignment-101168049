@@ -70,11 +70,11 @@ public class CPUFire : MonoBehaviour
         GameObject fireball = fireballManager.fireballs.Dequeue();
         fireball.transform.position = transform.position;
         fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
-        fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().speed + 1.5f;
+        fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().GetSpeed() + 1.5f;
         fireball.GetComponent<FireballBehaviour>().owner = gameObject;
         fireball.SetActive(true);
 
-        cooldown = Random.Range(stats.firerate, 3f);
+        cooldown = Random.Range(stats.GetFirerate(), 3f);
     }
 
     private bool CanShoot()

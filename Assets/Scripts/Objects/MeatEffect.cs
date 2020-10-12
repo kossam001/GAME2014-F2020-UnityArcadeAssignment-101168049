@@ -23,8 +23,8 @@ public class MeatEffect : Item
 
     public override void Pickup()
     {
-        if (owner.GetComponent<CharacterStats>().speed <= owner.GetComponent<CharacterStats>().maxSpeed)
-            owner.GetComponent<CharacterStats>().speed++;
+
+        owner.GetComponent<CharacterStats>().IncreaseSpeed();
 
         base.Pickup();
     }

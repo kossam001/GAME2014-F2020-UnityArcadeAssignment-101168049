@@ -43,13 +43,13 @@ public class CPUSearch : MonoBehaviour
         HitResult result = new HitResult();
 
         // Search front
-        SearchInDirection(DetectionDirection.front, transform.right, stats.detectionRange, ref result);
+        SearchInDirection(DetectionDirection.front, transform.right, stats.GetDetectionRange(), ref result);
 
         // Search right
-        SearchInDirection(DetectionDirection.right, -transform.up, stats.detectionRange * 0.5f, ref result);
+        SearchInDirection(DetectionDirection.right, -transform.up, stats.GetDetectionRange() * 0.5f, ref result);
 
         // Search left
-        SearchInDirection(DetectionDirection.left, transform.up, stats.detectionRange * 0.5f, ref result);
+        SearchInDirection(DetectionDirection.left, transform.up, stats.GetDetectionRange() * 0.5f, ref result);
 
         // Search back
         //SearchInDirection(DetectionDirection.back, -transform.right, stats.detectionRange * 0.3f, "Player", ref result);

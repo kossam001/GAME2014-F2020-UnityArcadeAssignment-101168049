@@ -18,18 +18,26 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     // Stats
-    public float speed = 3;
-    public float maxSpeed = 10;
+    [SerializeField]
+    private float speed = 3;
+    [SerializeField]
+    private float maxSpeed = 10;
 
-    public float firerate = 1;
-    public float maxFirerate = 0.2f;
+    [SerializeField]
+    private float firerate = 1;
+    [SerializeField]
+    private float maxFirerate = 0.2f;
 
-    private int health = 1; 
-    public float maxHealth = 5;
+    [SerializeField]
+    private int health = 1;
+    [SerializeField]
+    private float maxHealth = 5;
 
+    [SerializeField]
     private float shieldDuration;
 
-    public float detectionRange = 15;
+    [SerializeField]
+    private float detectionRange = 15;
 
     // States
     public bool isChasing = false;
@@ -79,11 +87,45 @@ public class CharacterStats : MonoBehaviour
 
     public void IncreaseHealth()
     {
-        health++;
+        if (health < maxHealth)
+        {
+            health++;
+        }
     }
 
     public int GetHealth()
     {
         return health;
+    }
+
+    public void IncreaseSpeed()
+    {
+        if (speed < maxSpeed)
+        {
+            speed++;
+        }
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void IncreaseFirerate()
+    {
+        if (firerate < maxFirerate)
+        {
+            firerate -= 0.1f;
+        }
+    }
+
+    public float GetFirerate()
+    {
+        return firerate;
+    }
+
+    public float GetDetectionRange()
+    {
+        return detectionRange;
     }
 }

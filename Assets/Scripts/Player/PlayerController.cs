@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // moves character by getting axis value - keyboard input 
-        transform.position += new Vector3(Input.GetAxis("Horizontal") * stats.speed * Time.deltaTime,
-                                          Input.GetAxis("Vertical") * stats.speed * Time.deltaTime,
+        transform.position += new Vector3(Input.GetAxis("Horizontal") * stats.GetSpeed() * Time.deltaTime,
+                                          Input.GetAxis("Vertical") * stats.GetSpeed() * Time.deltaTime,
                                           0.0f);
     }
 
@@ -98,12 +98,12 @@ public class PlayerController : MonoBehaviour
             GameObject fireball = fireballManager.fireballs.Dequeue();
             fireball.transform.position = transform.position;
             fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
-            fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().speed + 1.5f;
+            fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().GetSpeed() + 1.5f;
             fireball.GetComponent<FireballBehaviour>().owner = gameObject;
             fireball.SetActive(true);
             //GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
             //newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
-            cooldown = stats.firerate;
+            cooldown = stats.GetFirerate();
         }
         
     }
