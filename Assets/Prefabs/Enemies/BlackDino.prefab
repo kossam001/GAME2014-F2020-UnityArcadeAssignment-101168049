@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 30
-  shieldDuration: 2.5
+  shieldDuration: 1
 --- !u!1001 &4445773758278223502
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,7 +20,6 @@ public class LoadScene : MonoBehaviour
 
     public void onButtonClicked()
     {
-        Debug.Log("Button Clicked");
         SceneManager.LoadScene(sceneName);
     }
 }

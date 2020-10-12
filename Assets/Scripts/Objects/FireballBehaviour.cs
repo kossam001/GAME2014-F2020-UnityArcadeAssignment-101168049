@@ -57,6 +57,11 @@ public class FireballBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!owner)
+        {
+            return;
+        }
+
         if (collision.gameObject.tag == "StaticObstacle")
         {
             manager.fireballs.Enqueue(gameObject);
@@ -91,12 +96,7 @@ public class FireballBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<CharacterStats>().DecreaseHealth();
                 manager.fireballs.Enqueue(gameObject);
                 gameObject.SetActive(false);
-
-                // Enemy dead if health = 0
-                if (collision.gameObject.GetComponent<CharacterStats>().GetHealth() <= 0)
-                {
-                    collision.gameObject.GetComponent<CharacterStats>().isDead = true;
-                }
+                
             }
             else if (collision.gameObject.tag == "Player" && !ReferenceEquals(collision.gameObject, owner))
             {

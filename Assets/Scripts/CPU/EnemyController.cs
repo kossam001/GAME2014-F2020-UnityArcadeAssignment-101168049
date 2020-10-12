@@ -139,6 +139,9 @@ public class EnemyController : MonoBehaviour
         manager.numEnemiesActive--;
         stats.isDead = false;
         stats.AddPoints();
+
+        manager.UpdateCounter();
+
         gameObject.SetActive(false);
         GetComponent<CharacterStats>().ResetStats();
     }

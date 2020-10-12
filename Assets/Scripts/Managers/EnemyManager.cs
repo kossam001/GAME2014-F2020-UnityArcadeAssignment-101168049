@@ -24,6 +24,9 @@ public class EnemyManager : MonoBehaviour
     // Spawn data
     public int numEnemiesActive;
     public int maxEnemiesActive = 5;
+    public int maxEnemyInStage = 10;
+    public int numEnemiesSpawned = 0;
+    public int numEnemiesRemaining;
     private float spawnTimer = 0;
 
     // Data structures
@@ -33,6 +36,10 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.UpdateEnemies(maxEnemyInStage);
+
+        numEnemiesRemaining = maxEnemyInStage;
+
         foreach (GameObject CPU in enemyPrefabs)
         {
             for (int i = 0; i < 5; i++)
@@ -63,7 +70,10 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        Spawn();
+        if (numEnemiesSpawned < maxEnemyInStage)
+        {
+            Spawn();
+        }
 
         // Reset timer
         spawnTimer = Random.Range(3f, 10f);
@@ -82,7 +92,20 @@ public class EnemyManager : MonoBehaviour
 
         spawnedEnemy.SetActive(true);
         numEnemiesActive++;
+        numEnemiesSpawned++;
 
         inactiveEnemies.RemoveAt(randomIndex);
+    }
+
+    public void UpdateCounter()
+    {
+        numEnemiesRemaining--;
+        GameManager.Instance.UpdateEnemies(numEnemiesRemaining);
+
+        // Clear Stage
+        if (numEnemiesRemaining < 1)
+        {
+            GameManager.Instance.LoadStage("Level1");
+        }
     }
 }

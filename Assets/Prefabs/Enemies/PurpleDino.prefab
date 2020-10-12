@@ -79,5 +79,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PurpleDino
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6954312058156191693, guid: ea037e6905542fd4186e7f0e7a498bf5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ea037e6905542fd4186e7f0e7a498bf5, type: 3}

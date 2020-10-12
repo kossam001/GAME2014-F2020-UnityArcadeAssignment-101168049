@@ -102,7 +102,21 @@ public class CharacterStats : MonoBehaviour
             health--;
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 255);
             StartCoroutine(TakeDamage());
+
+            if (gameObject.tag == "Player")
+                GameManager.Instance.UpdateLives(health);
+
+            if (health <= 0)
+            {
+                isDead = true;
+            }
         }
+    }
+
+    // Health carries over level
+    public void SetHealth(int _health)
+    {
+        health = _health;
     }
 
     private IEnumerator TakeDamage()
@@ -116,6 +130,8 @@ public class CharacterStats : MonoBehaviour
         if (health < maxHealth)
         {
             health++;
+            if (gameObject.tag == "Player")
+                GameManager.Instance.UpdateLives(health);
         }
     }
 

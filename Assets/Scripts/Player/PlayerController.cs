@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        stats.SetHealth(GameManager.Instance.lives);
     }
 
     // Update is called once per frame
@@ -35,10 +35,11 @@ public class PlayerController : MonoBehaviour
         Fire();
 
         cooldown -= Time.deltaTime;
-        //Debug.Log("Turn Right? " + !CanTurnRight());
-        //Debug.Log("Turn Left? " + !CanTurnLeft());
-        //Debug.Log("Turn Back? " + CanTurnBack());
-        //Debug.Log("See? " + Search());
+
+        if (stats.isDead)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
     private void Move()
@@ -63,26 +64,6 @@ public class PlayerController : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 10);
         }
-
-        // Simple rotation
-        //float rotationSpeed = 20;
-
-        //if (Input.GetAxis("Horizontal") > 0.1f)
-        //{
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 0)), rotationSpeed);
-        //}
-        //if (Input.GetAxis("Horizontal") < -0.1f)
-        //{
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 180)), rotationSpeed);
-        //}
-        //if (Input.GetAxis("Vertical") > 0.1f)
-        //{
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), rotationSpeed);
-        //}
-        //if (Input.GetAxis("Vertical") < -0.1f)
-        //{
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 270)), rotationSpeed);
-        //}
     }
 
     float cooldown;
@@ -101,36 +82,9 @@ public class PlayerController : MonoBehaviour
             fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().GetSpeed() + 1.5f;
             fireball.GetComponent<FireballBehaviour>().owner = gameObject;
             fireball.SetActive(true);
-            //GameObject newFireball = Instantiate(fireball, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90));
-            //newFireball.GetComponent<FireballBehaviour>().owner = gameObject; // Doing this instead of parenting so the scale is unaffected
+           
             cooldown = stats.GetFirerate();
         }
         
-    }
-
-    public float dist = 1.1f;
-    public float scale = 0.1f;
-    private bool CanTurnBack()
-    {
-        return Physics2D.BoxCast(transform.position,
-    new Vector2(size * scale, size * scale), 0, transform.right, dist, 0b10100000000);
-    }
-
-    private bool CanTurnRight()
-    {
-        return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
-            new Vector2(size, size), 0, -transform.up, 3, 0b10100000000);
-    }
-
-    private bool CanTurnLeft()
-    {
-        return Physics2D.BoxCast(transform.GetComponent<CapsuleCollider2D>().bounds.center,
-            new Vector2(size, size), 0, transform.up, 3, 0b10100000000);
-    }
-
-    public float sight = 10;
-    private bool Search()
-    {
-        return Physics2D.Raycast(transform.position, transform.right, 10, 0b1100000000);
     }
 }
