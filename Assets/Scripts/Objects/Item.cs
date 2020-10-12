@@ -35,6 +35,9 @@ public class Item : MonoBehaviour
         gameObject.SetActive(false);
 
         manager.itemsSpawned--;
+
+        if (owner.tag == "Player")
+            GameManager.Instance.AddScore(1500);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

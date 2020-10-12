@@ -37,7 +37,10 @@ public class TreeBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<FireballBehaviour>().despawn = true; // Raise the flag, don't do it on its own
                                                                                        // or collider bugs.
 
-                GameManager.Instance.AddScore(points);
+                if (collision.gameObject.GetComponent<FireballBehaviour>().owner.tag == "Player")
+                {
+                    GameManager.Instance.AddScore(points);
+                }
             }
         }
     }
