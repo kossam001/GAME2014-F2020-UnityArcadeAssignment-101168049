@@ -13,9 +13,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private int score = 0;
+
+    // UI
+    [SerializeField]
+    private Text scoreText;
 
     private void Start()
     {
@@ -26,5 +32,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void AddScore(int _score)
+    {
+        score += _score;
     }
 }
