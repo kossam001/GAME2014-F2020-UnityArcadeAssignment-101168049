@@ -19,6 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -137,6 +138,8 @@ public class EnemyController : MonoBehaviour
         manager.activeEnemies.Remove(gameObject);
         manager.numEnemiesActive--;
         stats.isDead = false;
+        stats.AddPoints();
         gameObject.SetActive(false);
+        GetComponent<CharacterStats>().ResetStats();
     }
 }

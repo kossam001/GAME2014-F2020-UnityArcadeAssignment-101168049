@@ -2,34 +2,41 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-11
+ * Last Modified: 2020-10-12
  * 
  * Contains information on the character.
  * 
  * 2020-10-10: Added script.
  * 2020-10-11: Added death state.
  * 2020-10-11: Health related functions added for easier implementation of shield buff.
+ * 2020-10-12: Enemies change colour to show damage.
+ * 2020-10-12: Set default values for stats so they can be reverted on respawn.
+ * 2020-10-12: Adds score.
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class CharacterStats : MonoBehaviour
 {
     // Stats
     [SerializeField]
-    private float speed = 3;
+    private float origSpeed, speed = 3;
+
     [SerializeField]
     private float maxSpeed = 10;
 
     [SerializeField]
-    private float firerate = 1;
+    private float origFirerate, firerate = 1;
+
     [SerializeField]
     private float maxFirerate = 0.2f;
 
     [SerializeField]
-    private int health = 1;
+    private int origHealth, health = 1;
+
     [SerializeField]
     private float maxHealth = 5;
 
@@ -46,7 +53,16 @@ public class CharacterStats : MonoBehaviour
 
     // Other
     public SpriteRenderer shieldSprite;
-    
+    public int points;
+
+    // Initialize default values
+    private void Start()
+    {
+        origFirerate = firerate;
+        origHealth = health;
+        origSpeed = speed;
+    }
+
     public void ActivateShield(float duration)
     {
         if (hasShield)
@@ -82,7 +98,17 @@ public class CharacterStats : MonoBehaviour
     public void DecreaseHealth()
     {
         if (!hasShield)
+        {
             health--;
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 255);
+            StartCoroutine(TakeDamage());
+        }
+    }
+
+    private IEnumerator TakeDamage()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
     }
 
     public void IncreaseHealth()
@@ -127,5 +153,18 @@ public class CharacterStats : MonoBehaviour
     public float GetDetectionRange()
     {
         return detectionRange;
+    }
+
+    public void ResetStats()
+    {
+        health = origHealth;
+        speed = origSpeed;
+        firerate = origFirerate;
+        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+    }
+
+    public void AddPoints()
+    {
+        GameManager.Instance.AddScore(points);
     }
 }
