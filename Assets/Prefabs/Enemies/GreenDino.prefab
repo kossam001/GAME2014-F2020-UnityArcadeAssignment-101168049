@@ -301,16 +301,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd212ade4568724493343bbe839204c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  origSpeed: 0
   speed: 3
   maxSpeed: 10
+  origFirerate: 0
   firerate: 1
   maxFirerate: 0.2
+  origHealth: 0
+  health: 1
   maxHealth: 5
+  shieldDuration: 0
   detectionRange: 15
   isChasing: 0
   isDead: 0
   hasShield: 0
   shieldSprite: {fileID: 6304950379233545974}
+  points: 500
 --- !u!1001 &5170524547607975018
 PrefabInstance:
   m_ObjectHideFlags: 0

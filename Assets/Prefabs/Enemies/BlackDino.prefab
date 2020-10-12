@@ -43,7 +43,7 @@ PrefabInstance:
       objectReference: {fileID: 3772100506641295246}
     - target: {fileID: 9146427120017792619, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
       propertyPath: speed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9146427120017792619, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
       propertyPath: firerate
@@ -52,6 +52,18 @@ PrefabInstance:
     - target: {fileID: 9146427120017792619, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
       propertyPath: health
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146427120017792619, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146427120017792619, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
+      propertyPath: maxFirerate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146427120017792619, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
+      propertyPath: points
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 9146427120017792620, guid: d6356dc5a3bf6d94bae3041daca4849d, type: 3}
       propertyPath: m_Sprite

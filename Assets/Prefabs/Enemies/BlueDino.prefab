@@ -77,7 +77,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2340380006024704413, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
       propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340380006024704413, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
+      propertyPath: maxHealth
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340380006024704413, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
+      propertyPath: points
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3609563770610560401, guid: ed5bdb83416ad7a4c9e998af9f755835, type: 3}
       propertyPath: m_RootOrder
