@@ -73,12 +73,12 @@ public class FireballBehaviour : MonoBehaviour
                 owner.tag != "CPU") // CPUs should not be able to kill other CPUs
             {
                 owner = null;
-                collision.gameObject.GetComponent<CharacterStats>().health--;
+                collision.gameObject.GetComponent<CharacterStats>().DecreaseHealth();
                 manager.fireballs.Enqueue(gameObject);
                 gameObject.SetActive(false);
 
                 // Enemy dead if health = 0
-                if (collision.gameObject.GetComponent<CharacterStats>().health <= 0)
+                if (collision.gameObject.GetComponent<CharacterStats>().GetHealth() <= 0)
                 {
                     collision.gameObject.GetComponent<CharacterStats>().isDead = true;
                 }
@@ -86,7 +86,7 @@ public class FireballBehaviour : MonoBehaviour
             else if (collision.gameObject.tag == "Player" && !ReferenceEquals(collision.gameObject, owner))
             {
                 owner = null;
-                collision.gameObject.GetComponent<CharacterStats>().health--;
+                collision.gameObject.GetComponent<CharacterStats>().DecreaseHealth();
                 manager.fireballs.Enqueue(gameObject);
                 gameObject.SetActive(false);
             }

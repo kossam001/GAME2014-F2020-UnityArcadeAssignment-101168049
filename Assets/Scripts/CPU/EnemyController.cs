@@ -110,10 +110,10 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.tag == "Player")
-        {
-            StartCoroutine(Knockback(collision.collider.gameObject));
-        }
+        //if (collision.collider.gameObject.tag == "Player")
+        //{
+        //    StartCoroutine(Knockback(collision.collider.gameObject));
+        //}
     }
 
     private IEnumerator Knockback(GameObject character)
