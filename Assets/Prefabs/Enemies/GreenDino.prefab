@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 2340380006024704408}
   - component: {fileID: 2340380006024704414}
   - component: {fileID: 2340380006024704413}
+  - component: {fileID: 6416600672562000934}
   m_Layer: 10
   m_Name: GreenDino
   m_TagString: CPU
@@ -317,6 +318,25 @@ MonoBehaviour:
   hasShield: 0
   shieldSprite: {fileID: 6304950379233545974}
   points: 500
+--- !u!95 &6416600672562000934
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340380006024704391}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 367407ae9ed02df4f810ddbc433e9ff1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5170524547607975018
 PrefabInstance:
   m_ObjectHideFlags: 0
