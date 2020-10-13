@@ -45,6 +45,16 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        // Play Animation
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            GetComponent<Animator>().SetBool("Walk", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Walk", false);
+        }
+
         // moves character by getting axis value - keyboard input 
         transform.position += new Vector3(Input.GetAxis("Horizontal") * stats.GetSpeed() * Time.deltaTime,
                                           Input.GetAxis("Vertical") * stats.GetSpeed() * Time.deltaTime,
