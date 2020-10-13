@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         if (stats.isDead)
         {
             GameManager.Instance.GameOver();
+            stats.ResetStats();
         }
     }
 
