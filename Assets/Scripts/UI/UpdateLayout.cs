@@ -43,29 +43,41 @@ public class UpdateLayout : MonoBehaviour
     [SerializeField]
     private Text scoreTextLandscape;
     [SerializeField]
+    private Text scoreTextPortrait;
+
+    [SerializeField]
     private Text livesTextLandscape;
     [SerializeField]
+    private Text livesTextPortrait;
+
+    [SerializeField]
     private Text enemiesLeftTextLandscape;
+    [SerializeField]
+    private Text enemiesLeftTextPortrait;
 
     public void UpdateScore(int score)
     {
         scoreTextLandscape.text = score.ToString();
+        scoreTextPortrait.text = score.ToString();
     }
 
     public void UpdateLives(int lives)
     {
         livesTextLandscape.text = lives.ToString();
+        livesTextPortrait.text = lives.ToString();
     }
 
     public void UpdateEnemyCounter(int enemies)
     {
         enemiesLeftTextLandscape.text = enemies.ToString();
+        enemiesLeftTextPortrait.text = enemies.ToString();
     }
 
     public bool isReady()
     {
         // Possible for this to be initialized but labels not
-        if (enemiesLeftTextLandscape && livesTextLandscape && scoreTextLandscape)
+        if (enemiesLeftTextLandscape && livesTextLandscape && scoreTextLandscape &&
+            enemiesLeftTextPortrait && livesTextPortrait && scoreTextPortrait)
         {
             return true;
         }
