@@ -2,14 +2,16 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-09
+ * Last Modified: 2020-10-15
  * 
  * Controls the player character.
  * 
  * 2020-10-06: Added this script.
  * 2020-10-09: Added testing code.  Need removal.
+ * 2020-10-15: Added touch controls.  
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +23,11 @@ public class PlayerController : MonoBehaviour
     public float size = 0.9f;
     public FireballManager fireballManager;
 
+    // Touch controls
+    public GameObject moveButtonLandscape;
+    public GameObject moveButtonPortrait;
+    private GameObject moveButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +37,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (moveButtonLandscape.activeInHierarchy)
+        {
+            moveButton = moveButtonLandscape;
+        }
+        else if (moveButtonPortrait.activeInHierarchy)
+        {
+            moveButton = moveButtonPortrait;
+        }
+
         Move();
         Turn();
-        Fire();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+        }
 
         cooldown -= Time.deltaTime;
 
@@ -40,10 +60,33 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.GameOver();
             stats.ResetStats();
-        }
+        }    
     }
 
     private void Move()
+    {
+        UseKeyboardInput();
+        UseTouchInput();
+    }
+
+    private void UseTouchInput()
+    {
+        if (moveButton.GetComponent<MovementButton>().HoldDirection.x != 0 
+            || moveButton.GetComponent<MovementButton>().HoldDirection.y != 0)
+        {
+            GetComponent<Animator>().SetBool("Walk", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Walk", false);
+        }
+
+        transform.position += new Vector3(moveButton.GetComponent<MovementButton>().HoldDirection.x * stats.GetSpeed() * Time.deltaTime,
+                                  moveButton.GetComponent<MovementButton>().HoldDirection.y * stats.GetSpeed() * Time.deltaTime,
+                                  0.0f);
+    }
+
+    private void UseKeyboardInput()
     {
         // Play Animation
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -64,7 +107,11 @@ public class PlayerController : MonoBehaviour
     private void Turn()
     {
         // movement vector - calculated using current position minus future position
-        Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal") + transform.position.x, Input.GetAxis("Vertical") + transform.position.y)
+        //Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal") + transform.position.x, Input.GetAxis("Vertical") + transform.position.y)
+        //    - transform.position;
+
+        Vector3 moveDirection = new Vector3(moveButton.GetComponent<MovementButton>().HoldDirection.x + transform.position.x,
+            moveButton.GetComponent<MovementButton>().HoldDirection.y + transform.position.y)
             - transform.position;
 
         // don't update rotation if player is not moving
@@ -78,24 +125,20 @@ public class PlayerController : MonoBehaviour
     }
 
     float cooldown;
-    private void Fire()
+    public void Fire()
     {
         if (cooldown > 0)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject fireball = fireballManager.fireballs.Dequeue();
-            fireball.transform.position = transform.position;
-            fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
-            fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().GetSpeed() + 1.5f;
-            fireball.GetComponent<FireballBehaviour>().owner = gameObject;
-            fireball.SetActive(true);
+        GameObject fireball = fireballManager.fireballs.Dequeue();
+        fireball.transform.position = transform.position;
+        fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
+        fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().GetSpeed() + 1.5f;
+        fireball.GetComponent<FireballBehaviour>().owner = gameObject;
+        fireball.SetActive(true);
            
-            cooldown = stats.GetFirerate();
-        }
-        
+        cooldown = stats.GetFirerate();
     }
 }

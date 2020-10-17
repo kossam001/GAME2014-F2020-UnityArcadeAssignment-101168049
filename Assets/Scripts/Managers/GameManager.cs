@@ -2,14 +2,14 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-12
+ * Last Modified: 2020-10-15
  * 
  * Manages gameplay elements.
  * 
  * 2020-10-10: Added script.
  * 2020-10-11: Moved item related code to ItemManager
  * 2020-10-12: Added scorekeeping and displaying it on a text label.
- * 2020-10-12: Changed the system to be 
+ * 2020-10-15: Reset player lives on gameover
  */
 
 using System.Collections;
@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     // UI
     [SerializeField]
     public int lives = 3;
+    public int origLives = 3;
+
     [SerializeField]
     public int enemiesLeft;
 
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        lives = origLives;
         SceneManager.LoadScene("GameOver");
     }
 
