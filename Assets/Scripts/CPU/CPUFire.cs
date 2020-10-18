@@ -67,7 +67,7 @@ public class CPUFire : MonoBehaviour
             ShootRight();
         }
 
-        GameObject fireball = fireballManager.fireballs.Dequeue();
+        GameObject fireball = fireballManager.DequeueFireball();
         fireball.transform.position = transform.position;
         fireball.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -90);
         fireball.GetComponent<FireballBehaviour>().speed = GetComponent<CharacterStats>().GetSpeed() + 1.5f;

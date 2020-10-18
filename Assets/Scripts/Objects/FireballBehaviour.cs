@@ -45,7 +45,7 @@ public class FireballBehaviour : MonoBehaviour
         {
             owner = null;
             gameObject.SetActive(false);
-            manager.fireballs.Enqueue(gameObject);
+            manager.EnqueueFireball(gameObject);
             despawn = false;
         }
     }
@@ -64,7 +64,7 @@ public class FireballBehaviour : MonoBehaviour
 
         if (collision.gameObject.tag == "StaticObstacle")
         {
-            manager.fireballs.Enqueue(gameObject);
+            manager.EnqueueFireball(gameObject);
             gameObject.SetActive(false);
         }
         // Projectiles destroy other projectiles
@@ -75,7 +75,7 @@ public class FireballBehaviour : MonoBehaviour
                 GameManager.Instance.AddScore(points);
             }
 
-            manager.fireballs.Enqueue(gameObject);
+            manager.EnqueueFireball(gameObject);
             gameObject.SetActive(false);
         }
         // It is possible to destroy own nest
@@ -83,7 +83,7 @@ public class FireballBehaviour : MonoBehaviour
         {
             collision.gameObject.GetComponent<Nest>().DecreaseHealth();
 
-            manager.fireballs.Enqueue(gameObject);
+            manager.EnqueueFireball(gameObject);
             gameObject.SetActive(false);
         }
         else if (owner != null)
@@ -94,7 +94,7 @@ public class FireballBehaviour : MonoBehaviour
             {
                 owner = null;
                 collision.gameObject.GetComponent<CharacterStats>().DecreaseHealth();
-                manager.fireballs.Enqueue(gameObject);
+                manager.EnqueueFireball(gameObject);
                 gameObject.SetActive(false);
                 
             }
@@ -102,7 +102,7 @@ public class FireballBehaviour : MonoBehaviour
             {
                 owner = null;
                 collision.gameObject.GetComponent<CharacterStats>().DecreaseHealth();
-                manager.fireballs.Enqueue(gameObject);
+                manager.EnqueueFireball(gameObject);
                 gameObject.SetActive(false);
             }
         }
