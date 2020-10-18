@@ -74,8 +74,6 @@ public class MovementButton : Button
                     m_touchesEnded = worldTouch;
                     
                 }
-
-                Debug.Log(touch.fingerId);
             }
             yield return null;
         }

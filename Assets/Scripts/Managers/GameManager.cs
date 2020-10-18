@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-15
+ * Last Modified: 2020-10-18
  * 
  * Manages gameplay elements.
  * 
@@ -10,6 +10,7 @@
  * 2020-10-11: Moved item related code to ItemManager
  * 2020-10-12: Added scorekeeping and displaying it on a text label.
  * 2020-10-15: Reset player lives on gameover
+ * 2020-10-18: Added simple level progression.
  */
 
 using System.Collections;
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public int enemiesLeft;
+    public int maxEnemiesInStage = 5;
 
     // Check that the layout has been initialized before updating
     private IEnumerator QueueUpdate()
@@ -84,11 +86,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadStage(string stageName)
     {
+        maxEnemiesInStage += 5;
         SceneManager.LoadScene(stageName);
     }
 
     public void GameOver()
     {
+        maxEnemiesInStage = 5;
         lives = origLives;
         SceneManager.LoadScene("GameOver");
     }

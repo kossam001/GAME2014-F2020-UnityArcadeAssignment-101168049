@@ -3541,7 +3541,6 @@ MonoBehaviour:
   - {fileID: 778127147}
   numEnemiesActive: 0
   maxEnemiesActive: 5
-  maxEnemyInStage: 2
   numEnemiesSpawned: 0
   numEnemiesRemaining: 10
   inactiveEnemies: []
@@ -3623,6 +3622,7 @@ MonoBehaviour:
   lives: 3
   origLives: 3
   enemiesLeft: 0
+  maxEnemiesInStage: 1
 --- !u!1 &758807196
 GameObject:
   m_ObjectHideFlags: 0
@@ -9024,8 +9024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd212ade4568724493343bbe839204c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origSpeed: 3
-  speed: 10
+  origSpeed: 5
+  speed: 5
   maxSpeed: 10
   origFirerate: 1
   firerate: 1
