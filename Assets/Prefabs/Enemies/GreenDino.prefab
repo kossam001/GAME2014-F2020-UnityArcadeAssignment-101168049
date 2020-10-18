@@ -291,6 +291,7 @@ MonoBehaviour:
   fireball: {fileID: 1764842702609456422, guid: 6768cce46fdf9414883e1c13bee72563, type: 3}
   stats: {fileID: 2340380006024704413}
   fireballManager: {fileID: 0}
+  shootSE: {fileID: 8300000, guid: a1523e1b642030b439b5c4fc7fe55253, type: 3}
 --- !u!114 &2340380006024704413
 MonoBehaviour:
   m_ObjectHideFlags: 0

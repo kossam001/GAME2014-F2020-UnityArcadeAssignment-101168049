@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public GameObject moveButtonPortrait;
     private GameObject moveButton;
 
+    public AudioClip shootSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -131,6 +133,10 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
+        Vector3 audioPos = transform.position;
+        audioPos.z = -10;
+        AudioSource.PlayClipAtPoint(shootSE, audioPos, 0.1f);
 
         GameObject fireball = fireballManager.DequeueFireball();
         fireball.transform.position = transform.position;

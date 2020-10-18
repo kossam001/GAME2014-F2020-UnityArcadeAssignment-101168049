@@ -21,6 +21,8 @@ public class CPUFire : MonoBehaviour
     public CharacterStats stats;
     public FireballManager fireballManager;
 
+    public AudioClip shootSE;
+
     // Update is called once per frame
     void Update()
     {
@@ -66,6 +68,10 @@ public class CPUFire : MonoBehaviour
         {
             ShootRight();
         }
+
+        Vector3 audioPos = transform.position;
+        audioPos.z = -10;
+        AudioSource.PlayClipAtPoint(shootSE, audioPos, 0.1f);
 
         GameObject fireball = fireballManager.DequeueFireball();
         fireball.transform.position = transform.position;
