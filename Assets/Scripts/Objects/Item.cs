@@ -45,6 +45,10 @@ public class Item : MonoBehaviour
         if (collision.gameObject.tag == "Player" ||
             collision.gameObject.tag == "CPU")
         {
+            Vector3 audioPos = transform.position;
+            audioPos.z = -10;
+            AudioSource.PlayClipAtPoint(GetComponent<AudioSource>().clip, audioPos, 0.8f);
+
             owner = collision.gameObject;
             Pickup();
         }
