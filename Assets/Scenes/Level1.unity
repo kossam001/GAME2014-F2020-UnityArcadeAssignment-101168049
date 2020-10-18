@@ -8958,6 +8958,7 @@ MonoBehaviour:
   fireballManager: {fileID: 1096101219}
   moveButtonLandscape: {fileID: 772572736}
   moveButtonPortrait: {fileID: 2043084851}
+  shootSE: {fileID: 8300000, guid: a1523e1b642030b439b5c4fc7fe55253, type: 3}
 --- !u!50 &1874757415
 Rigidbody2D:
   serializedVersion: 4
