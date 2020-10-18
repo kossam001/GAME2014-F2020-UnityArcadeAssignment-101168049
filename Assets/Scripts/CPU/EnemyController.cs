@@ -134,6 +134,10 @@ public class EnemyController : MonoBehaviour
 
     private void Despawn()
     {
+        Vector3 audioPos = transform.position;
+        audioPos.z = -10;
+        AudioSource.PlayClipAtPoint(GetComponent<AudioSource>().clip, audioPos);
+
         manager.inactiveEnemies.Add(gameObject);
         manager.activeEnemies.Remove(gameObject);
         manager.numEnemiesActive--;

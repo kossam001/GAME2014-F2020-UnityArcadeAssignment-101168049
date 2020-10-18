@@ -3731,7 +3731,7 @@ MonoBehaviour:
   - {fileID: 778127147}
   numEnemiesActive: 0
   maxEnemiesActive: 5
-  maxEnemyInStage: 1
+  maxEnemyInStage: 2
   numEnemiesSpawned: 0
   numEnemiesRemaining: 10
   inactiveEnemies: []
@@ -8590,7 +8590,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0df0aa007ab181a42a623dae8ea5c05e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
