@@ -2,7 +2,7 @@
  * 
  * Samuel Ko
  * 101168049
- * Last Modified: 2020-10-12
+ * Last Modified: 2020-10-18
  * 
  * Contains information on the character.
  * 
@@ -12,6 +12,7 @@
  * 2020-10-12: Enemies change colour to show damage.
  * 2020-10-12: Set default values for stats so they can be reverted on respawn.
  * 2020-10-12: Adds score.
+ * 2020-10-18: Sound added.
  */
 
 using System.Collections;
@@ -54,6 +55,8 @@ public class CharacterStats : MonoBehaviour
     // Other
     public SpriteRenderer shieldSprite;
     public int points;
+
+    public AudioClip hitSE;
 
     // Initialize default values
     private void Start()
@@ -99,6 +102,10 @@ public class CharacterStats : MonoBehaviour
     {
         if (!hasShield)
         {
+            Vector3 audioPos = transform.position;
+            audioPos.z = -10;
+            AudioSource.PlayClipAtPoint(hitSE, audioPos);
+
             health--;
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 255);
             StartCoroutine(TakeDamage());

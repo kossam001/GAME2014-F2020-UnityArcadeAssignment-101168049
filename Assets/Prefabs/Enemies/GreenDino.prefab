@@ -319,6 +319,7 @@ MonoBehaviour:
   hasShield: 0
   shieldSprite: {fileID: 6304950379233545974}
   points: 500
+  hitSE: {fileID: 8300000, guid: 9c546acbb4916414697b97950313e197, type: 3}
 --- !u!95 &6416600672562000934
 Animator:
   serializedVersion: 3

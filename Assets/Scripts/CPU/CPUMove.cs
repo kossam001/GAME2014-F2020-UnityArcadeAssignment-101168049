@@ -86,7 +86,10 @@ public class CPUMove : MonoBehaviour
         if (Random.value < probability)
         {
             isTurning = true;
-            StartCoroutine(TurningInProgress(movementDir, angle));
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(TurningInProgress(movementDir, angle));
+            }
             success = true;
         }
 
