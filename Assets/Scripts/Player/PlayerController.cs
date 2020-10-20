@@ -49,7 +49,10 @@ public class PlayerController : MonoBehaviour
         }
 
         Move();
-        Turn();
+        if (moveButton.GetComponent<MovementButton>().isHolding)
+        {
+            Turn();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -117,7 +120,7 @@ public class PlayerController : MonoBehaviour
             - transform.position;
 
         // don't update rotation if player is not moving
-        if (moveDirection.sqrMagnitude != 0)
+        if (moveDirection.sqrMagnitude >= 10)
         {
             // rotate player gradually in the direction of movement.
             float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;

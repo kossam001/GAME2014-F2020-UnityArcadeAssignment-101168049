@@ -19,6 +19,7 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     public GameObject target;
+    public Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class Follow : MonoBehaviour
     void Update()
     {
         // keep z the same, it shouldn't matter, but for something like a camera, z is important
-        transform.position = new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z);
+        transform.position = new Vector3(target.transform.position.x + offset.x, 
+            target.transform.position.y + offset.y, 
+            transform.position.z + offset.z);
     }
 }

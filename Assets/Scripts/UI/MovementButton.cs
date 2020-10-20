@@ -20,8 +20,8 @@ public class MovementButton : Button
 {
     private Vector3 m_touchesEnded;
 
-    private bool isHolding = false;
-    private Vector3 buttonOrigin;
+    public bool isHolding = false;
+    public Vector3 buttonOrigin;
 
     private float maxDist = 70;
     public float MaxDist
@@ -35,20 +35,19 @@ public class MovementButton : Button
         get { return holdDirection; }
     }
 
-    protected override void Start()
-    {
-        buttonOrigin = gameObject.GetComponent<RectTransform>().position;
-    }
-
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        isHolding = true;
-        StartCoroutine(Hold());
+        if (!isHolding)
+        {
+            isHolding = true;
+            StartCoroutine(Hold());
+        }
     }
 
     IEnumerator Hold()
     {
+        buttonOrigin = gameObject.GetComponent<RectTransform>().position;
         while (isHolding)
         {
             foreach (var touch in Input.touches)

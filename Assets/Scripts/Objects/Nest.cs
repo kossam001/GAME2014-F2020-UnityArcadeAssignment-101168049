@@ -21,5 +21,10 @@ public class Nest : MonoBehaviour
     public void DecreaseHealth()
     {
         health--;
+
+        if (health <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 }
