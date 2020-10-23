@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
             - transform.position;
 
         // don't update rotation if player is not moving
-        if (moveDirection.sqrMagnitude >= 10)
+        if (moveDirection.sqrMagnitude >= 1)
         {
             // rotate player gradually in the direction of movement.
             float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;

@@ -37,7 +37,7 @@ public class SwapLayout : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (ScreenInformation.Instance.Orientation)
+        switch (Input.deviceOrientation)
         {
             case DeviceOrientation.LandscapeLeft:
                 landscapeLayout.SetActive(true);
@@ -79,17 +79,6 @@ public class SwapLayout : MonoBehaviour
                 cameraFollow.offset.y = -3.5f;
                 break;
             case DeviceOrientation.Unknown:
-                landscapeLayout.SetActive(false);
-                portraitLayout.SetActive(true);
-
-                // When orienting to portrait, the overall screen shrinks
-                // so the level becomes enlarged, so this section fixes that.
-                if (level != null)
-                {
-                    level.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                }
-
-                cameraFollow.offset.y = -3.5f;
                 break;
         }
     }

@@ -21,6 +21,11 @@ public class ItemManager : MonoBehaviour
 
     public List<GameObject> itemPrefabs;
 
+    // Spawn Bounds
+    public Transform upperLeftCorner;
+    public Transform upperRightCorner;
+    public Transform lowerLeftCorner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +47,8 @@ public class ItemManager : MonoBehaviour
     {
         if (itemsSpawned <= 0)
         {
-            float xPos = Random.Range(-16f, 12f);
-            float yPos = Random.Range(-8f, 20f);
+            float xPos = Random.Range(upperLeftCorner.position.x, upperRightCorner.position.x);
+            float yPos = Random.Range(upperLeftCorner.position.y, lowerLeftCorner.position.y);
 
             if (inactiveItems.Count <= 0)
             {

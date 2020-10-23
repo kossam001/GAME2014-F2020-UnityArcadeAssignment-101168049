@@ -34,16 +34,35 @@ public class ScreenInformation : MonoBehaviour
         }
     }
 
-    DeviceOrientation orientation;
-
-    public DeviceOrientation Orientation
+    public enum orientation
     {
-        get { return orientation; }
-        set { orientation = value; }
+        LANDSCAPELEFT,
+        LANDSCAPERIGHT,
+        PORTRAIT,
+        UNKNOWN
     }
+
+    public orientation lastOrientation = orientation.UNKNOWN;
 
     private void Update()
     {
-        orientation = Input.deviceOrientation;
+        switch (Input.deviceOrientation)
+        {
+            case DeviceOrientation.LandscapeLeft:
+                lastOrientation = orientation.LANDSCAPELEFT;
+                break;
+            case DeviceOrientation.LandscapeRight:
+                lastOrientation = orientation.LANDSCAPERIGHT;
+                break;
+            case DeviceOrientation.Portrait:
+                lastOrientation = orientation.PORTRAIT;
+                break;
+        }
+    }
+
+    public orientation GetLastOrientation()
+    {
+        Debug.Log(lastOrientation);
+        return lastOrientation;
     }
 }
