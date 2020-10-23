@@ -19,11 +19,13 @@ public class FinalScore : MonoBehaviour, DynamicUI
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Text>().text = GameManager.Instance.score.ToString();      
+        GetComponent<Text>().text = GameManager.Instance.score.ToString();
+        GameManager.Instance.score = 0;
     }
 
     public void OnLayoutChange()
     {
         GetComponent<Text>().text = GameManager.Instance.score.ToString();
+        GameManager.Instance.score = 0;
     }
 }
