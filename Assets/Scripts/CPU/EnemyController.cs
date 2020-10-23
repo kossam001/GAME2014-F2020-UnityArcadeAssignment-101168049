@@ -35,6 +35,16 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Need to scale the raycast distance when the screen orientation changes
+        if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+        {
+            stats.detectionRange *= 1.2f;
+        }
+        else
+        {
+            stats.detectionRange *= 1.5f;
+        }
+
         // Cleanup dead enemies inside own script instead of outside
         if (stats.isDead)
         {

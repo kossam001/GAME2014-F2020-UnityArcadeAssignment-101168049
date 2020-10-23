@@ -72,6 +72,11 @@ public class GameManager : MonoBehaviour
         updateUI.Invoke();
     }
 
+    public void ResetScore()
+    {
+        score = 0;
+    }
+
     public void UpdateEnemies(int enemyCount)
     {
         enemiesLeft = enemyCount;

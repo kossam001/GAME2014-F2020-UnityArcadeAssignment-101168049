@@ -20,12 +20,10 @@ public class FinalScore : MonoBehaviour, DynamicUI
     void Start()
     {
         GetComponent<Text>().text = GameManager.Instance.score.ToString();
-        GameManager.Instance.score = 0;
     }
 
     public void OnLayoutChange()
     {
         GetComponent<Text>().text = GameManager.Instance.score.ToString();
-        GameManager.Instance.score = 0;
     }
 }

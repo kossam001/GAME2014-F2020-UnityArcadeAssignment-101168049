@@ -44,8 +44,7 @@ public class CharacterStats : MonoBehaviour
     [SerializeField]
     private float shieldDuration;
 
-    [SerializeField]
-    private float detectionRange = 15;
+    public float detectionRange = 15;
 
     // States
     public bool isChasing = false;

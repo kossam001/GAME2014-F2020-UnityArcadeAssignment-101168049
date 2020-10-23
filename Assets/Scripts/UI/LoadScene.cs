@@ -20,6 +20,12 @@ public class LoadScene : MonoBehaviour
 
     public void onButtonClicked()
     {
+        // Reset the score
+        if (SceneManager.GetActiveScene().name == "GameOver")
+        {
+            GameManager.Instance.ResetScore();
+        }
+
         SceneManager.LoadScene(sceneName);
     }
 }
